@@ -1,0 +1,25 @@
+{
+	"expo": {
+		"name": "Money Savers",
+		"description": "Financial Tracker.",
+		"slug": "financetracker-app",
+		"privacy": "public",
+		"sdkVersion": "33.0.0",
+		"platforms": ["ios", "android"],
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"splash": {
+			"backgroundColor": "#e1eab8"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"androidStatusBar": {
+			"backgroundColor": "#86ad00"
+		}
+	}
+}
