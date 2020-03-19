@@ -136,13 +136,13 @@ export default class App extends React.Component {
 
   render() {
     return (<>
-        <Login></Login>
-       {/* <MenuTab
+        {/* <Login></Login> */}
+       <MenuTab
         data={this.state.data}
         deleteItem={this.deleteItem}
 		addItem={this.addItem}
 		editItem={this.editItem}
-      />  */}
+      /> 
       </>
     );
   }

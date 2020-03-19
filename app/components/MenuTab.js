@@ -18,9 +18,11 @@ export default class MenuTab extends React.Component {
     active: 0,
     xTabOne: 0,
     xTabTwo: 0,
+    xTabThree: 0,
     translateX: new Animated.Value(0),
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
+    translateXTabThree: new Animated.Value(width),
     translateY: -1000
   };
 
@@ -31,7 +33,8 @@ export default class MenuTab extends React.Component {
       xTabTwo,
       translateX,
       translateXTabOne,
-      translateXTabTwo
+      translateXTabTwo,
+      translateXTabThree
     } = this.state;
     Animated.spring(translateX, {
       toValue: type,
@@ -46,15 +49,39 @@ export default class MenuTab extends React.Component {
         Animated.spring(translateXTabTwo, {
           toValue: width,
           duration: 100
+        }).start(),
+        Animated.spring(translateXTabThree, {
+          toValue: width,
+          duration: 100
         }).start()
       ]);
-    } else {
+    } else if(active ===1){
       Animated.parallel([
         Animated.spring(translateXTabOne, {
           toValue: -width,
           duration: 100
         }).start(),
         Animated.spring(translateXTabTwo, {
+          toValue: 0,
+          duration: 100
+        }).start(),
+        Animated.spring(translateXTabThree, {
+          toValue: -width,
+          duration: 100
+        }).start()
+      ]);
+    }
+    else{
+      Animated.parallel([
+        Animated.spring(translateXTabOne, {
+          toValue: width,
+          duration: 100
+        }).start(),
+        Animated.spring(translateXTabTwo, {
+          toValue: width,
+          duration: 100
+        }).start(),
+        Animated.spring(translateXTabThree, {
           toValue: 0,
           duration: 100
         }).start()
@@ -66,10 +93,12 @@ export default class MenuTab extends React.Component {
     let {
       xTabOne,
       xTabTwo,
+      xTabThree,
       translateX,
       active,
       translateXTabOne,
       translateXTabTwo,
+      translateXTabThree,
       translateY
     } = this.state;
     return (
@@ -93,7 +122,7 @@ export default class MenuTab extends React.Component {
             <Animated.View
               style={{
                 position: "absolute",
-                width: "50%",
+                width: "33%",
                 height: "100%",
                 top: 0,
                 left: 0,
@@ -164,6 +193,37 @@ export default class MenuTab extends React.Component {
                 Incomes
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                borderWidth: 1,
+                borderColor: "#007aff",
+                borderRadius: 4,
+                borderRightWidth: 0,
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0
+              }}
+              onLayout={event =>
+                this.setState({
+                  xTabThree: event.nativeEvent.layout.x
+                })
+              }
+              onPress={() =>
+                this.setState({ active: 2 }, () => this.handleSlide(xTabThree))
+              }
+            >
+              <Text
+                style={{
+                  color: active === 0 ? "#fff" : "#007aff"
+                }}
+              >
+                OverView
+              </Text>
+            </TouchableOpacity>
+           
+           
           </View>
 
           <ScrollView>
@@ -218,6 +278,37 @@ export default class MenuTab extends React.Component {
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
               />
+             {/*  <View style={{ marginTop: 20 }}>
+                <Image
+                  source={require("../../assets/dog.jpg")}
+                  style={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: 15
+                  }}
+                />
+              </View> */}
+            </Animated.View>
+            <Animated.View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                transform: [
+                  {
+                    translateX: translateXTabThree
+                  },
+                  {
+                    translateY: -translateY
+                  }
+                ]
+              }}
+             /*  onLayout={event =>
+                this.setState({
+                  translateY: event.nativeEvent.layout.height
+                })
+              } */
+            >
+              <Text>Hi, I am a cute dog</Text>
               <View style={{ marginTop: 20 }}>
                 <Image
                   source={require("../../assets/dog.jpg")}
@@ -229,6 +320,8 @@ export default class MenuTab extends React.Component {
                 />
               </View>
             </Animated.View>
+
+            
           </ScrollView>
         </View>
       </View>
