@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import MenuTab from "./app/components/MenuTab";
-import Login from "./app/components/LogIn"
+import Login from "./app/components/LogIn";
 export default class App extends React.Component {
   state = {
     data: [

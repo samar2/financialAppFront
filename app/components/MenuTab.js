@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
+import InfoView from "./InfoView"
 
 const { width } = Dimensions.get("window");
 
@@ -23,7 +24,7 @@ export default class MenuTab extends React.Component {
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
     translateXTabThree: new Animated.Value(width),
-    translateY: -1000
+    translateY: -1000 
   };
 
   handleSlide = type => {
@@ -51,7 +52,7 @@ export default class MenuTab extends React.Component {
           duration: 100
         }).start(),
         Animated.spring(translateXTabThree, {
-          toValue: width,
+          toValue: width*2,
           duration: 100
         }).start()
       ]);
@@ -66,7 +67,7 @@ export default class MenuTab extends React.Component {
           duration: 100
         }).start(),
         Animated.spring(translateXTabThree, {
-          toValue: -width,
+          toValue: width,
           duration: 100
         }).start()
       ]);
@@ -74,11 +75,11 @@ export default class MenuTab extends React.Component {
     else{
       Animated.parallel([
         Animated.spring(translateXTabOne, {
-          toValue: width,
+          toValue: -width*2,
           duration: 100
         }).start(),
         Animated.spring(translateXTabTwo, {
-          toValue: width,
+          toValue: -width,
           duration: 100
         }).start(),
         Animated.spring(translateXTabThree, {
@@ -216,7 +217,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 0 ? "#fff" : "#007aff"
+                  color: active === 2 ? "#fff" : "#007aff"
                 }}
               >
                 OverView
@@ -239,9 +240,9 @@ export default class MenuTab extends React.Component {
               }}
               onLayout={event =>
                 this.setState({
-                  translateY: event.nativeEvent.layout.height
+                    translateY: event.nativeEvent.layout.height
                 })
-              }
+            }
             >
               <Text>Hi, I am a cute cat</Text>
               <View style={{ marginTop: 20 }}>
@@ -265,11 +266,12 @@ export default class MenuTab extends React.Component {
                     translateX: translateXTabTwo
                   },
                   {
-                    translateY: -translateY
+                    translateY:-translateY
                   }
                 ]
               }}
-            >
+             
+                         >
               <AddIncome addItem={this.props.addItem} />
               <ListNew
                 data={this.props.data.filter(item => {
@@ -278,16 +280,7 @@ export default class MenuTab extends React.Component {
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
               />
-             {/*  <View style={{ marginTop: 20 }}>
-                <Image
-                  source={require("../../assets/dog.jpg")}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 15
-                  }}
-                />
-              </View> */}
+             
             </Animated.View>
             <Animated.View
               style={{
@@ -296,19 +289,17 @@ export default class MenuTab extends React.Component {
                 transform: [
                   {
                     translateX: translateXTabThree
+                    
                   },
                   {
-                    translateY: -translateY
+                    translateY:-1000-translateY*3
                   }
                 ]
               }}
-             /*  onLayout={event =>
-                this.setState({
-                  translateY: event.nativeEvent.layout.height
-                })
-              } */
+             
+            
             >
-              <Text>Hi, I am a cute dog</Text>
+              {/* <Text>Hi, I am a cute dog</Text>
               <View style={{ marginTop: 20 }}>
                 <Image
                   source={require("../../assets/dog.jpg")}
@@ -318,7 +309,8 @@ export default class MenuTab extends React.Component {
                     borderRadius: 15
                   }}
                 />
-              </View>
+              </View> */}
+              <InfoView/>
             </Animated.View>
 
             
