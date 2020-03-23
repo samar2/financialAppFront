@@ -2,18 +2,15 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
-<<<<<<< HEAD
 //import SignUp from "./app/components/SignUp";
 //import GoalSavings from "./app/components/GoalSavings";
 //import InfoView from "./app/components/InfoView";
 //import GoalSavingsTable from "./app/components/GoalSavingsTable";
 import BackHandler from "./app/components/BackHandler";
-=======
-import Reports from './app/components/Reports';
->>>>>>> fbf0d9bf2ab37aa7aa7f9a875447147c10677e86
+import Reports from "./app/components/Reports";
 export default class App extends React.Component {
   state = {
-    incomes:[],
+    incomes: [],
     data: [
       {
         id: 1,
@@ -50,7 +47,7 @@ export default class App extends React.Component {
         category: "Extra",
         description: "something",
         title: "Freelance",
-        amount:700,
+        amount: 700,
         currency: "$",
         date: "11/03/2020",
         type: "income"
@@ -154,8 +151,8 @@ export default class App extends React.Component {
     this.setState({ data });
   };
 
-  componentDidMount(){
-    const arrIncome = this.state.data.filter(item=>item.type==="income");
+  componentDidMount() {
+    const arrIncome = this.state.data.filter(item => item.type === "income");
     var holder = {};
 
     arrIncome.forEach(function(d) {
@@ -165,40 +162,36 @@ export default class App extends React.Component {
         holder[d.category] = d.amount;
       }
     });
-    
+
     var obj2 = [];
-    
+
     for (var prop in holder) {
-      obj2.push({ category: prop, amount: holder[prop], currency:'$' });
+      obj2.push({ category: prop, amount: holder[prop], currency: "$" });
     }
-    this.setState({incomes:obj2})
+    this.setState({ incomes: obj2 });
   }
   render() {
-<<<<<<< HEAD
     return (
       <>
         {/* <Login></Login> }
        <MenuTab
-=======
     return (<>
         {/* <Login></Login> */}
-       {/* <MenuTab
->>>>>>> fbf0d9bf2ab37aa7aa7f9a875447147c10677e86
+        {/* <MenuTab
         data={this.state.data}
         deleteItem={this.deleteItem}
 		addItem={this.addItem}
 		editItem={this.editItem}
-<<<<<<< HEAD
     />}
     {<SignUp></SignUp>}
     {<GoalSavings></GoalSavings>}
     {<InfoView></InfoView>}
     {<GoalSavingsTable></GoalSavingsTable>*/}
         {<BackHandler></BackHandler>}
-=======
-      />  */}
-      {this.state.incomes.length!==0?<Reports data={this.state.incomes}/>:null}
->>>>>>> fbf0d9bf2ab37aa7aa7f9a875447147c10677e86
+        /> */}
+        {this.state.incomes.length !== 0 ? (
+          <Reports data={this.state.incomes} />
+        ) : null}
       </>
     );
   }
