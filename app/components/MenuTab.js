@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
-import InfoView from "./InfoView"
+import InfoView from "./InfoView";
 
 const { width } = Dimensions.get("window");
 
@@ -24,7 +24,7 @@ export default class MenuTab extends React.Component {
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
     translateXTabThree: new Animated.Value(width),
-    translateY: -1000 
+    translateY: -1000
   };
 
   handleSlide = type => {
@@ -52,11 +52,11 @@ export default class MenuTab extends React.Component {
           duration: 100
         }).start(),
         Animated.spring(translateXTabThree, {
-          toValue: width*2,
+          toValue: width * 2,
           duration: 100
         }).start()
       ]);
-    } else if(active ===1){
+    } else if (active === 1) {
       Animated.parallel([
         Animated.spring(translateXTabOne, {
           toValue: -width,
@@ -71,11 +71,10 @@ export default class MenuTab extends React.Component {
           duration: 100
         }).start()
       ]);
-    }
-    else{
+    } else {
       Animated.parallel([
         Animated.spring(translateXTabOne, {
-          toValue: -width*2,
+          toValue: -width * 2,
           duration: 100
         }).start(),
         Animated.spring(translateXTabTwo, {
@@ -223,8 +222,6 @@ export default class MenuTab extends React.Component {
                 OverView
               </Text>
             </TouchableOpacity>
-           
-           
           </View>
 
           <ScrollView>
@@ -240,9 +237,9 @@ export default class MenuTab extends React.Component {
               }}
               onLayout={event =>
                 this.setState({
-                    translateY: event.nativeEvent.layout.height
+                  translateY: event.nativeEvent.layout.height
                 })
-            }
+              }
             >
               <Text>Hi, I am a cute cat</Text>
               <View style={{ marginTop: 20 }}>
@@ -266,12 +263,11 @@ export default class MenuTab extends React.Component {
                     translateX: translateXTabTwo
                   },
                   {
-                    translateY:-translateY
+                    translateY: -translateY
                   }
                 ]
               }}
-             
-                         >
+            >
               <AddIncome addItem={this.props.addItem} />
               <ListNew
                 data={this.props.data.filter(item => {
@@ -280,7 +276,6 @@ export default class MenuTab extends React.Component {
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
               />
-             
             </Animated.View>
             <Animated.View
               style={{
@@ -289,15 +284,12 @@ export default class MenuTab extends React.Component {
                 transform: [
                   {
                     translateX: translateXTabThree
-                    
                   },
                   {
-                    translateY:-1000-translateY*3
+                    translateY: -1000 - translateY * 3
                   }
                 ]
               }}
-             
-            
             >
               {/* <Text>Hi, I am a cute dog</Text>
               <View style={{ marginTop: 20 }}>
@@ -310,10 +302,8 @@ export default class MenuTab extends React.Component {
                   }}
                 />
               </View> */}
-              <InfoView/>
+              <InfoView />
             </Animated.View>
-
-            
           </ScrollView>
         </View>
       </View>

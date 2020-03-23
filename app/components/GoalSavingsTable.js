@@ -3,18 +3,14 @@ import * as Progress from "react-native-progress";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
-export default class InfoView extends React.Component {
+export default class MyGoals extends React.Component {
   state = {
     active: 0
   };
   render() {
     return (
       <>
-        <Text style={styles.budgetTitle}>
-          Budget{"\n"}
-          {"\n"}
-          1000$
-        </Text>
+        <Text style={styles.budgetTitle}>My Goals</Text>
         <View
           style={{
             flexDirection: "row",
@@ -46,9 +42,7 @@ export default class InfoView extends React.Component {
                 textAlign: "center"
               }}
             >
-              Expenses{"\n"}
-              {"\n"}
-              1000$
+              Older Goals
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -73,9 +67,7 @@ export default class InfoView extends React.Component {
                 textAlign: "center"
               }}
             >
-              Incomes{"\n"}
-              {"\n"}
-              2000$
+              Current Goals
             </Text>
           </TouchableOpacity>
         </View>

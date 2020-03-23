@@ -2,6 +2,11 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
+//import SignUp from "./app/components/SignUp";
+//import GoalSavings from "./app/components/GoalSavings";
+//import InfoView from "./app/components/InfoView";
+//import GoalSavingsTable from "./app/components/GoalSavingsTable";
+import BackHandler from "./app/components/BackHandler";
 export default class App extends React.Component {
   state = {
     data: [
@@ -109,8 +114,8 @@ export default class App extends React.Component {
     data.push(item);
     this.setState({ data });
   };
-  editItem = (id, props ) => {
-     const data = this.state.data.map(item => {
+  editItem = (id, props) => {
+    const data = this.state.data.map(item => {
       // if this is the contact we need to change, update it. This will apply to exactly
       // one contact
       if (item.id === id) {
@@ -130,19 +135,25 @@ export default class App extends React.Component {
       else {
         return item;
       }
-	});
-	this.setState({data}); 
+    });
+    this.setState({ data });
   };
 
   render() {
-    return (<>
-        {/* <Login></Login> */}
+    return (
+      <>
+        {/* <Login></Login> }
        <MenuTab
         data={this.state.data}
         deleteItem={this.deleteItem}
 		addItem={this.addItem}
 		editItem={this.editItem}
-      /> 
+    />}
+    {<SignUp></SignUp>}
+    {<GoalSavings></GoalSavings>}
+    {<InfoView></InfoView>}
+    {<GoalSavingsTable></GoalSavingsTable>*/}
+        {<BackHandler></BackHandler>}
       </>
     );
   }
