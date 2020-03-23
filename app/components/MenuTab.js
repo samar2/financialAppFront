@@ -11,10 +11,7 @@ import {
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
 import InfoView from "./InfoView";
-<<<<<<< HEAD
-=======
 import AddGoal from "./AddGoal";
->>>>>>> fbf0d9bf2ab37aa7aa7f9a875447147c10677e86
 
 const { width } = Dimensions.get("window");
 
@@ -245,7 +242,7 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <AddGoal/>
+              <AddGoal />
               {/* <Text>Hi, I am a cute cat</Text>
               <View style={{ marginTop: 20 }}>
                 <Image
@@ -291,13 +288,12 @@ export default class MenuTab extends React.Component {
                     translateX: translateXTabThree
                   },
                   {
-                    translateY:-1000-translateY*6
+                    translateY: -1000 - translateY * 6
                   }
                 ]
               }}
             >
-              
-              <InfoView data ={this.props.data}/>
+              <InfoView data={this.props.data} />
             </Animated.View>
           </ScrollView>
         </View>
