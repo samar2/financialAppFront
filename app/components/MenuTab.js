@@ -11,6 +11,10 @@ import {
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
 import InfoView from "./InfoView";
+<<<<<<< HEAD
+=======
+import AddGoal from "./AddGoal";
+>>>>>>> fbf0d9bf2ab37aa7aa7f9a875447147c10677e86
 
 const { width } = Dimensions.get("window");
 
@@ -241,7 +245,8 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <Text>Hi, I am a cute cat</Text>
+              <AddGoal/>
+              {/* <Text>Hi, I am a cute cat</Text>
               <View style={{ marginTop: 20 }}>
                 <Image
                   source={require("../../assets/cat.jpg")}
@@ -251,7 +256,7 @@ export default class MenuTab extends React.Component {
                     borderRadius: 15
                   }}
                 />
-              </View>
+              </View> */}
             </Animated.View>
 
             <Animated.View
@@ -286,23 +291,13 @@ export default class MenuTab extends React.Component {
                     translateX: translateXTabThree
                   },
                   {
-                    translateY: -1000 - translateY * 3
+                    translateY:-1000-translateY*6
                   }
                 ]
               }}
             >
-              {/* <Text>Hi, I am a cute dog</Text>
-              <View style={{ marginTop: 20 }}>
-                <Image
-                  source={require("../../assets/dog.jpg")}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 15
-                  }}
-                />
-              </View> */}
-              <InfoView />
+              
+              <InfoView data ={this.props.data}/>
             </Animated.View>
           </ScrollView>
         </View>
