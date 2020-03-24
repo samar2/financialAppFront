@@ -14,22 +14,23 @@ export default class AddGoal extends React.Component {
   };
 
   toggleModal = () => {
-    this.props.addItem({
-      title: this.state.title,
-      category: this.state.category,
+    this.props.AddGoal({
+      goalname: this.state.goalname,
       description: this.state.description,
-      date: this.state.date,
+      stardate: this.state.date,
+      enddate: this.state.date,
       amount: this.state.amount,
       currency: this.state.currency,
-      type: "income"
+      type: "goal"
     });
     this.setState({
       isModalVisible: false,
-      title: "",
+      goalname: "",
       description: "",
-      date: "",
-      currency: "",
-      amount: ""
+      stardate: "",
+      enddate: "",
+      amount: "",
+      currency: ""
     });
   };
   render() {
@@ -51,7 +52,7 @@ export default class AddGoal extends React.Component {
               onChangeText={category => this.setState({ category })}
               value={this.state.category}
             />
-            <Text>Title:</Text>
+            <Text>Goal Name:</Text>
             <TextInput
               style={{ height: 40 }}
               onChangeText={title => this.setState({ title })}

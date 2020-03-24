@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 //import SignUp from "./app/components/SignUp";
-//import GoalSavings from "./app/components/GoalSavings";
+import AddGoalSavings from "./app/components/AddGoalSavings";
 //import InfoView from "./app/components/InfoView";
-//import GoalSavingsTable from "./app/components/GoalSavingsTable";
-import BackHandler from "./app/components/BackHandler";
-import Reports from "./app/components/Reports";
+//import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
+//import BackHandler from "./app/components/BackHandler";
+//import Reports from "./app/components/Reports";
 export default class App extends React.Component {
   state = {
     incomes: [],
@@ -151,6 +151,148 @@ export default class App extends React.Component {
     this.setState({ data });
   };
 
+  state = {
+    goals: [],
+    data: [
+      {
+        id: 1,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 2,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 3,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 4,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 5,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 6,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 7,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 8,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      },
+      {
+        id: 8,
+        goalname: "Car",
+        description: "Honda",
+        start_date: "05 / 03 / 2020",
+        end_date: "05 / 03 / 2020",
+        amount: 50,
+        currency: "$",
+        type: "goal"
+      }
+    ]
+  };
+  deletegoal = id => {
+    const data = this.state.data.filter(item => {
+      return item.id !== id;
+    });
+    this.setState({ data });
+  };
+  addGoal = props => {
+    const data = [...this.state.data];
+    const id = data[data.length - 1].id + 1;
+    const item = {
+      id: id,
+      goalname: props.category,
+      description: props.description,
+      amount: props.amount,
+      currency: props.currency,
+      startdate: props.date,
+      endtdate: props.date,
+      type: props.type
+    };
+    data.push(item);
+    this.setState({ data });
+  };
+  editgoal = (id, props) => {
+    const data = this.state.data.map(item => {
+      // if this is the contact we need to change, update it. This will apply to exactly
+      // one contact
+      if (item.id === id) {
+        const newgoal = {
+          id: item.id,
+          goalname: props.goalname || item.goalname,
+          description: props.description || item.description,
+          amount: props.amount || item.amount,
+          currency: props.currency || item.currency,
+          startdate: props.startdate || item.startdate,
+          enddate: props.enddate || item.enddate,
+          type: props.type || item.type
+        };
+        return newgoal;
+      }
+      // otherwise, don't change the transaction at all
+      else {
+        return item;
+      }
+    });
+    this.setState({ data });
+  };
+
   componentDidMount() {
     const arrIncome = this.state.data.filter(item => item.type === "income");
     var holder = {};
@@ -166,32 +308,18 @@ export default class App extends React.Component {
     var obj2 = [];
 
     for (var prop in holder) {
-      obj2.push({ category: prop, amount: holder[prop], currency: "$" });
+      obj2.push({
+        category: prop,
+        amount: holder[prop],
+        currency: "$"
+      });
     }
     this.setState({ incomes: obj2 });
   }
   render() {
     return (
       <>
-        {/* <Login></Login> }
-       <MenuTab
-    return (<>
-        {/* <Login></Login> */}
-        {/* <MenuTab
-        data={this.state.data}
-        deleteItem={this.deleteItem}
-		addItem={this.addItem}
-		editItem={this.editItem}
-    />}
-    {<SignUp></SignUp>}
-    {<GoalSavings></GoalSavings>}
-    {<InfoView></InfoView>}
-    {<GoalSavingsTable></GoalSavingsTable>*/}
-        {<BackHandler></BackHandler>}
-        /> */}
-        {this.state.incomes.length !== 0 ? (
-          <Reports data={this.state.incomes} />
-        ) : null}
+        <AddGoalSavings></AddGoalSavings>
       </>
     );
   }
