@@ -18,49 +18,54 @@ export default class InfoView extends React.Component {
       (a, b) => a + (b.type == "income" ? b.amount : -b.amount),
       0
     );
-   // console.log(budget);
+    // console.log(budget);
     const income = this.props.data.reduce(
       (a, b) => a + (b.type == "income" ? b.amount : 0),
       0
     );
     const expense = Math.abs(budget - income);
-      const arrIncome = this.props.data.filter(item=>item.type==="income");
-      var holder = {};
+    const arrIncome = this.props.data.filter(item => item.type === "income");
+    var holder = {};
 
-      arrIncome.forEach(function(d) {
-        if (holder.hasOwnProperty(d.category)) {
-          holder[d.category] = holder[d.category] + d.amount;
-        } else {
-          holder[d.category] = d.amount;
-        }
-      });
-      
-      var obj2 = [];
-      
-      for (var prop in holder) {
-        obj2.push({ category: prop, amount: holder[prop], currency:'$' });
+    arrIncome.forEach(function(d) {
+      if (holder.hasOwnProperty(d.category)) {
+        holder[d.category] = holder[d.category] + d.amount;
+      } else {
+        holder[d.category] = d.amount;
       }
-      
-      const arrExpense = this.props.data.filter(item=>item.type==="expense");
-      var holder2 = {};
+    });
 
-      arrExpense.forEach(function(d) {
-        if (holder2.hasOwnProperty(d.category)) {
-          holder2[d.category] = holder2[d.category] + d.amount;
-        } else {
-          holder2[d.category] = d.amount;
-        }
-      });
-      
-      var obj3 = [];
-      
-      for (var prop in holder2) {
-        obj3.push({ category: prop, amount: holder2[prop], currency:'$' });
+    var obj2 = [];
+
+    for (var prop in holder) {
+      obj2.push({ category: prop, amount: holder[prop], currency: "$" });
+    }
+
+    const arrExpense = this.props.data.filter(item => item.type === "expense");
+    var holder2 = {};
+
+    arrExpense.forEach(function(d) {
+      if (holder2.hasOwnProperty(d.category)) {
+        holder2[d.category] = holder2[d.category] + d.amount;
+      } else {
+        holder2[d.category] = d.amount;
       }
-      
-    
-    this.setState({ budget, income, expense, incomesByCat:obj2, expensesByCat:obj3 });
-      }
+    });
+
+    var obj3 = [];
+
+    for (var prop in holder2) {
+      obj3.push({ category: prop, amount: holder2[prop], currency: "$" });
+    }
+
+    this.setState({
+      budget,
+      income,
+      expense,
+      incomesByCat: obj2,
+      expensesByCat: obj3
+    });
+  }
 
   render() {
     return (
@@ -137,10 +142,9 @@ export default class InfoView extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.mainContainer}>
-          {this.state.active==="income"?this.state.incomesByCat.map(
-            transaction =>
-              (
-                <View style={{ height: 55 }} key={transaction.category+"inc"}>
+          {this.state.active === "income"
+            ? this.state.incomesByCat.map(transaction => (
+                <View style={{ height: 55 }} key={transaction.category + "inc"}>
                   <View style={styles.containerLabels}>
                     <Text style={styles.labelCategory}>
                       {transaction.category}
@@ -184,59 +188,53 @@ export default class InfoView extends React.Component {
                     </Text>
                   </View>
                 </View>
-              )
-          )
-        :
-        this.state.expensesByCat.map(
-          transaction =>
-            (
-              <View style={{ height: 55 }} key={transaction.category+"exp"}>
-                <View style={styles.containerLabels}>
-                  <Text style={styles.labelCategory}>
-                    {transaction.category}
-                  </Text>
-                  <Text
-                    style={{
-                      ...styles.labelAmount,
-                      color: this.state.active === "expense" ? "red" : "green"
-                    }}
-                  >
-                    {transaction.amount}
-                    {transaction.currency}
-                  </Text>
+              ))
+            : this.state.expensesByCat.map(transaction => (
+                <View style={{ height: 55 }} key={transaction.category + "exp"}>
+                  <View style={styles.containerLabels}>
+                    <Text style={styles.labelCategory}>
+                      {transaction.category}
+                    </Text>
+                    <Text
+                      style={{
+                        ...styles.labelAmount,
+                        color: this.state.active === "expense" ? "red" : "green"
+                      }}
+                    >
+                      {transaction.amount}
+                      {transaction.currency}
+                    </Text>
+                  </View>
+                  <View style={styles.container}>
+                    <Ionicons
+                      name="md-heart"
+                      size={32}
+                      color="orange"
+                      style={styles.icon}
+                    />
+                    <Progress.Bar
+                      progress={
+                        this.state.active === "expense"
+                          ? transaction.amount / this.state.expense
+                          : transaction.amount / this.state.income
+                      }
+                      width={200}
+                      height={20}
+                      style={styles.bar}
+                    />
+                    <Text style={styles.text}>
+                      {this.state.active === "expense"
+                        ? Math.ceil(
+                            (transaction.amount * 100) / this.state.expense
+                          )
+                        : Math.ceil(
+                            (transaction.amount / this.state.income) * 100
+                          )}
+                      %
+                    </Text>
+                  </View>
                 </View>
-                <View style={styles.container}>
-                  <Ionicons
-                    name="md-heart"
-                    size={32}
-                    color="orange"
-                    style={styles.icon}
-                  />
-                  <Progress.Bar
-                    progress={
-                      this.state.active === "expense"
-                        ? transaction.amount / this.state.expense
-                        : transaction.amount / this.state.income
-                    }
-                    width={200}
-                    height={20}
-                    style={styles.bar}
-                  />
-                  <Text style={styles.text}>
-                    {this.state.active === "expense"
-                      ? Math.ceil(
-                          (transaction.amount * 100) / this.state.expense
-                        )
-                      : Math.ceil(
-                          (transaction.amount / this.state.income) * 100
-                        )}
-                    %
-                  </Text>
-                </View>
-              </View>
-            )
-        )
-        }
+              ))}
           {/*  <View style={styles.containerLabels}>
             <Text style={styles.labelCategory}>Entertainment</Text>
             <Text style={styles.labelAmount}>250$</Text>
