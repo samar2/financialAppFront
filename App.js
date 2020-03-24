@@ -6,6 +6,7 @@ import Reports from './app/components/Reports';
 export default class App extends React.Component {
   state = {
     incomes:[],
+    expenses:[],
     data: [
       {
         id: 1,
@@ -163,7 +164,23 @@ export default class App extends React.Component {
     for (var prop in holder) {
       obj2.push({ category: prop, amount: holder[prop], currency:'$' });
     }
-    this.setState({incomes:obj2})
+    const arrExpense = this.state.data.filter(item=>item.type==="expense");
+    var holder2 = {};
+
+    arrExpense.forEach(function(d) {
+      if (holder2.hasOwnProperty(d.category)) {
+        holder2[d.category] = holder2[d.category] + d.amount;
+      } else {
+        holder2[d.category] = d.amount;
+      }
+    });
+    
+    var obj3 = [];
+    
+    for (var prop in holder2) {
+      obj3.push({ category: prop, amount: holder2[prop], currency:'$' });
+    }
+    this.setState({incomes:obj2, expenses:obj3})
   }
   render() {
     return (<>
@@ -174,7 +191,9 @@ export default class App extends React.Component {
 		addItem={this.addItem}
 		editItem={this.editItem}
       />  */}
-      {this.state.incomes.length!==0?<Reports data={this.state.incomes}/>:null}
+      {this.state.incomes.length!==0?<Reports incomes={this.state.incomes}
+      expenses={this.state.expenses}
+      />:null}
       </>
     );
   }
