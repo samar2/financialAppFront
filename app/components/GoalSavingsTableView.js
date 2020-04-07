@@ -35,7 +35,7 @@ class GoalSavingsTableView extends React.Component {
           /* cleanFromScreen={id => this.cleanFromScreen(id)} */
           deleteItem={this.props.deleteItem}
           leftButtonPressed={() => console.log("left button pressed")}
-          deleteButtonPressed={() => this.props.deleteItem(item.id)}
+          deleteButtonPressed={() => this.props.deletegoal(item.id)}
           editButtonPressed={() =>
             this.setState({
               isModalVisible: true,

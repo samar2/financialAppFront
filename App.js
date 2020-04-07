@@ -1,14 +1,21 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet,View, Image, TouchableOpacity } from "react-native";
+import MainStackNavigator from './src/navigation/AppNavigator'
+
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 //import SignUp from "./app/components/SignUp";
 import AddGoalSavings from "./app/components/AddGoalSavings";
+import GoalSavingsTableView from "./app/components/GoalSavingsTableView"
 //import InfoView from "./app/components/InfoView";
 //import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
 //import BackHandler from "./app/components/BackHandler";
 //import Reports from "./app/components/Reports";
-export default class App extends React.Component {
+
+
+
+
+ class App extends React.Component {
   state = {
     incomes:[],
     expenses:[],
@@ -152,7 +159,7 @@ export default class App extends React.Component {
     this.setState({ data });
   };
 
-  state = {
+ /*  state = {
     goals: [],
     data: [
       {
@@ -246,7 +253,7 @@ export default class App extends React.Component {
         type: "goal"
       }
     ]
-  };
+  }; */
   deletegoal = id => {
     const data = this.state.data.filter(item => {
       return item.id !== id;
@@ -334,21 +341,25 @@ export default class App extends React.Component {
     this.setState({incomes:obj2, expenses:obj3})
   }
   render() {
-    return (<>
+    return <MainStackNavigator />
+   // return (<>
         {/* <Login></Login> */}
-       {/* <MenuTab
+     /*   <MenuTab
         data={this.state.data}
         deleteItem={this.deleteItem}
 		addItem={this.addItem}
 		editItem={this.editItem}
-      />  */}
-      {this.state.incomes.length!==0?<Reports incomes={this.state.incomes}
+      />  */
+   {/*    {this.state.incomes.length!==0?<Reports incomes={this.state.incomes}
       expenses={this.state.expenses}
-      />:null}
-      </>
-    );
+      />:null} */}
+    {/*   <GoalSavingsTableView data={this.state.data} deletegoal={this.deletegoal}></GoalSavingsTableView> */}
+    //  </>
+   // );
   }
 }
+export default App;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

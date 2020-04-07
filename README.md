@@ -30,3 +30,8 @@ expo-cli start
 ## Built With
 
 - [React Native](http://facebook.github.io/react-native/): A cross-platform mobile app framework.
+ "expo": "^33.0.0",
+    "react": "16.8.3",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+   
