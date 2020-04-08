@@ -1,18 +1,24 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import Drawer from "./app/components/Drawer";
+import { StyleSheet,View, Image, TouchableOpacity } from "react-native";
+import MainStackNavigator from './src/navigation/AppNavigator'
+
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 //import SignUp from "./app/components/SignUp";
 import AddGoalSavings from "./app/components/AddGoalSavings";
+import GoalSavingsTableView from "./app/components/GoalSavingsTableView"
 //import InfoView from "./app/components/InfoView";
 //import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
 //import BackHandler from "./app/components/BackHandler";
 //import Reports from "./app/components/Reports";
 
-export default class App extends React.Component {
+
+
+
+ class App extends React.Component {
   state = {
-    incomes: [],
+    incomes:[],
+    expenses:[],
     data: [
       {
         id: 1,
@@ -153,7 +159,7 @@ export default class App extends React.Component {
     this.setState({ data });
   };
 
-  state = {
+ /*  state = {
     goals: [],
     data: [
       {
@@ -247,7 +253,7 @@ export default class App extends React.Component {
         type: "goal"
       }
     ]
-  };
+  }; */
   deletegoal = id => {
     const data = this.state.data.filter(item => {
       return item.id !== id;
@@ -316,21 +322,43 @@ export default class App extends React.Component {
         currency: "$"
       });
     }
-    this.setState({ incomes: obj2 });
+    const arrExpense = this.state.data.filter(item=>item.type==="expense");
+    var holder2 = {};
+
+    arrExpense.forEach(function(d) {
+      if (holder2.hasOwnProperty(d.category)) {
+        holder2[d.category] = holder2[d.category] + d.amount;
+      } else {
+        holder2[d.category] = d.amount;
+      }
+    });
+    
+    var obj3 = [];
+    
+    for (var prop in holder2) {
+      obj3.push({ category: prop, amount: holder2[prop], currency:'$' });
+    }
+    this.setState({incomes:obj2, expenses:obj3})
   }
   render() {
-    return (
-      <>
-        <AddGoalSavings></AddGoalSavings>
-      </>
-    );
+    return <MainStackNavigator />
+   // return (<>
+        {/* <Login></Login> */}
+     /*   <MenuTab
+        data={this.state.data}
+        deleteItem={this.deleteItem}
+		addItem={this.addItem}
+		editItem={this.editItem}
+      />  */
+   {/*    {this.state.incomes.length!==0?<Reports incomes={this.state.incomes}
+      expenses={this.state.expenses}
+      />:null} */}
+    {/*   <GoalSavingsTableView data={this.state.data} deletegoal={this.deletegoal}></GoalSavingsTableView> */}
+    //  </>
+   // );
   }
 }
-class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
-}
+export default App;
 
 const styles = StyleSheet.create({
   container: {

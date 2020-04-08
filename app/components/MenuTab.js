@@ -25,7 +25,9 @@ export default class MenuTab extends React.Component {
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
     translateXTabThree: new Animated.Value(width),
-    translateY: -1000
+    translateY: -1000, 
+    translateSS: -1000, 
+    translateBB: -1000
   };
 
   handleSlide = type => {
@@ -100,7 +102,9 @@ export default class MenuTab extends React.Component {
       translateXTabOne,
       translateXTabTwo,
       translateXTabThree,
-      translateY
+      translateY,
+      translateSS,  
+      translateBB
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -242,18 +246,14 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <AddGoal />
-              {/* <Text>Hi, I am a cute cat</Text>
-              <View style={{ marginTop: 20 }}>
-                <Image
-                  source={require("../../assets/cat.jpg")}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: 15
-                  }}
-                />
-              </View> */}
+             {/* add expense view here */}
+             <ListNew
+                data={this.props.data.filter(item => {
+                  return item.type === "expense";
+                })}
+                deleteItem={this.props.deleteItem}
+                editItem={this.props.editItem}
+              />
             </Animated.View>
 
             <Animated.View
@@ -269,6 +269,10 @@ export default class MenuTab extends React.Component {
                   }
                 ]
               }}
+              onLayout={event =>
+                this.setState({
+                  translateBB: event.nativeEvent.layout.height
+                })}
             >
               <AddIncome addItem={this.props.addItem} />
               <ListNew
@@ -288,10 +292,15 @@ export default class MenuTab extends React.Component {
                     translateX: translateXTabThree
                   },
                   {
-                    translateY: -1000 - translateY * 6
+                    translateY:   - translateY- translateBB
                   }
                 ]
               }}
+              onLayout={event =>
+                this.setState({
+                  translateSS: event.nativeEvent.layout.height
+                })}
+              
             >
               <InfoView data={this.props.data} />
             </Animated.View>
