@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import Drawer from "./app/components/Drawer";
 import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 //import SignUp from "./app/components/SignUp";
@@ -8,6 +9,7 @@ import AddGoalSavings from "./app/components/AddGoalSavings";
 //import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
 //import BackHandler from "./app/components/BackHandler";
 //import Reports from "./app/components/Reports";
+
 export default class App extends React.Component {
   state = {
     incomes: [],
@@ -324,6 +326,12 @@ export default class App extends React.Component {
     );
   }
 }
+class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

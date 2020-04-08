@@ -37,7 +37,7 @@ export default class AddGoal extends React.Component {
     return (
       <>
         <Button
-          title="Goal Savings"
+          title="ADD Goal"
           onPress={() => this.setState({ isModalVisible: true })}
         ></Button>
         <Modal
