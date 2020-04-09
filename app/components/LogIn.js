@@ -4,26 +4,25 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
-  View
+  View,
 } from "react-native";
 
 export default class App extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
 
   render() {
     return (
-     
-        <>
-       < View style={styles.container}>
+      <>
+        <View style={styles.container}>
           <View style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder="Email: "
               placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ email: text })}
+              onChangeText={(text) => this.setState({ email: text })}
             />
           </View>
 
@@ -33,7 +32,7 @@ export default class App extends React.Component {
               placeholder="Password :"
               secureTextEntry={true}
               placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ password: save })}
+              onChangeText={(text) => this.setState({ password: save })}
             />
           </View>
 
@@ -44,9 +43,8 @@ export default class App extends React.Component {
           <TouchableOpacity style={styles.loginBtn}>
             <Text style={styles.loginText}>LOGIN</Text>
           </TouchableOpacity>
-          </ View>
-        </>
-      
+        </View>
+      </>
     );
   }
 }
@@ -54,15 +52,15 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   logo: {
     fontWeight: "bold",
     fontSize: 50,
     color: "#fb5b5a",
-    marginBottom: 40
+    marginBottom: 40,
   },
   inputView: {
     width: "80%",
@@ -71,15 +69,15 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom: 20,
     justifyContent: "center",
-    padding: 20
+    padding: 20,
   },
   inputText: {
     height: 50,
-    color: "white"
+    color: "white",
   },
   forgot: {
     color: "white",
-    fontSize: 11
+    fontSize: 11,
   },
   loginBtn: {
     width: "80%",
@@ -89,6 +87,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });

@@ -6,7 +6,7 @@ import {
   Animated,
   ScrollView,
   Image,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
@@ -25,12 +25,12 @@ export default class MenuTab extends React.Component {
     translateXTabOne: new Animated.Value(0),
     translateXTabTwo: new Animated.Value(width),
     translateXTabThree: new Animated.Value(width),
-    translateY: -1000, 
-    translateSS: -1000, 
-    translateBB: -1000
+    translateY: -1000,
+    translateSS: -1000,
+    translateBB: -1000,
   };
 
-  handleSlide = type => {
+  handleSlide = (type) => {
     let {
       active,
       xTabOne,
@@ -38,56 +38,56 @@ export default class MenuTab extends React.Component {
       translateX,
       translateXTabOne,
       translateXTabTwo,
-      translateXTabThree
+      translateXTabThree,
     } = this.state;
     Animated.spring(translateX, {
       toValue: type,
-      duration: 100
+      duration: 100,
     }).start();
     if (active === 0) {
       Animated.parallel([
         Animated.spring(translateXTabOne, {
           toValue: 0,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabTwo, {
           toValue: width,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabThree, {
           toValue: width * 2,
-          duration: 100
-        }).start()
+          duration: 100,
+        }).start(),
       ]);
     } else if (active === 1) {
       Animated.parallel([
         Animated.spring(translateXTabOne, {
           toValue: -width,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabTwo, {
           toValue: 0,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabThree, {
           toValue: width,
-          duration: 100
-        }).start()
+          duration: 100,
+        }).start(),
       ]);
     } else {
       Animated.parallel([
         Animated.spring(translateXTabOne, {
           toValue: -width * 2,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabTwo, {
           toValue: -width,
-          duration: 100
+          duration: 100,
         }).start(),
         Animated.spring(translateXTabThree, {
           toValue: 0,
-          duration: 100
-        }).start()
+          duration: 100,
+        }).start(),
       ]);
     }
   };
@@ -103,8 +103,8 @@ export default class MenuTab extends React.Component {
       translateXTabTwo,
       translateXTabThree,
       translateY,
-      translateSS,  
-      translateBB
+      translateSS,
+      translateBB,
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -112,16 +112,18 @@ export default class MenuTab extends React.Component {
           style={{
             width: "100%",
             marginLeft: "auto",
-            marginRight: "auto"
+            marginRight: "auto",
+            backgroundColor: "white",
           }}
         >
           <View
             style={{
               flexDirection: "row",
-              marginTop: 40,
+              marginTop: 0,
               marginBottom: 20,
               height: 36,
-              position: "relative"
+              position: "relative",
+              backgroundColor: "#e1eab8",
             }}
           >
             <Animated.View
@@ -131,13 +133,13 @@ export default class MenuTab extends React.Component {
                 height: "100%",
                 top: 0,
                 left: 0,
-                backgroundColor: "#007aff",
+                backgroundColor: "pink",
                 borderRadius: 4,
                 transform: [
                   {
-                    translateX
-                  }
-                ]
+                    translateX,
+                  },
+                ],
               }}
             />
             <TouchableOpacity
@@ -146,15 +148,15 @@ export default class MenuTab extends React.Component {
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
-                borderColor: "#007aff",
+                borderColor: "#170d2c",
                 borderRadius: 4,
                 borderRightWidth: 0,
                 borderTopRightRadius: 0,
-                borderBottomRightRadius: 0
+                borderBottomRightRadius: 0,
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  xTabOne: event.nativeEvent.layout.x
+                  xTabOne: event.nativeEvent.layout.x,
                 })
               }
               onPress={() =>
@@ -163,7 +165,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 0 ? "#fff" : "#007aff"
+                  color: active === 0 ? "white" : "#170d2c",
                 }}
               >
                 Expenses
@@ -175,15 +177,15 @@ export default class MenuTab extends React.Component {
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
-                borderColor: "#007aff",
+                borderColor: "#170d2c",
                 borderRadius: 4,
                 borderLeftWidth: 0,
                 borderTopLeftRadius: 0,
-                borderBottomLeftRadius: 0
+                borderBottomLeftRadius: 0,
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  xTabTwo: event.nativeEvent.layout.x
+                  xTabTwo: event.nativeEvent.layout.x,
                 })
               }
               onPress={() =>
@@ -192,7 +194,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 1 ? "#fff" : "#007aff"
+                  color: active === 1 ? "white" : "#170d2c",
                 }}
               >
                 Incomes
@@ -208,11 +210,11 @@ export default class MenuTab extends React.Component {
                 borderRadius: 4,
                 borderRightWidth: 0,
                 borderTopRightRadius: 0,
-                borderBottomRightRadius: 0
+                borderBottomRightRadius: 0,
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  xTabThree: event.nativeEvent.layout.x
+                  xTabThree: event.nativeEvent.layout.x,
                 })
               }
               onPress={() =>
@@ -221,7 +223,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 2 ? "#fff" : "#007aff"
+                  color: active === 2 ? "white" : "#170d2c",
                 }}
               >
                 OverView
@@ -236,19 +238,19 @@ export default class MenuTab extends React.Component {
                 alignItems: "center",
                 transform: [
                   {
-                    translateX: translateXTabOne
-                  }
-                ]
+                    translateX: translateXTabOne,
+                  },
+                ],
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  translateY: event.nativeEvent.layout.height
+                  translateY: event.nativeEvent.layout.height,
                 })
               }
             >
-             {/* add expense view here */}
-             <ListNew
-                data={this.props.data.filter(item => {
+              {/* add expense view here */}
+              <ListNew
+                data={this.props.data.filter((item) => {
                   return item.type === "expense";
                 })}
                 deleteItem={this.props.deleteItem}
@@ -262,21 +264,22 @@ export default class MenuTab extends React.Component {
                 alignItems: "center",
                 transform: [
                   {
-                    translateX: translateXTabTwo
+                    translateX: translateXTabTwo,
                   },
                   {
-                    translateY: -translateY
-                  }
-                ]
+                    translateY: -translateY,
+                  },
+                ],
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  translateBB: event.nativeEvent.layout.height
-                })}
+                  translateBB: event.nativeEvent.layout.height,
+                })
+              }
             >
               <AddIncome addItem={this.props.addItem} />
               <ListNew
-                data={this.props.data.filter(item => {
+                data={this.props.data.filter((item) => {
                   return item.type === "income";
                 })}
                 deleteItem={this.props.deleteItem}
@@ -289,18 +292,18 @@ export default class MenuTab extends React.Component {
                 alignItems: "center",
                 transform: [
                   {
-                    translateX: translateXTabThree
+                    translateX: translateXTabThree,
                   },
                   {
-                    translateY:   - translateY- translateBB
-                  }
-                ]
+                    translateY: -translateY - translateBB,
+                  },
+                ],
               }}
-              onLayout={event =>
+              onLayout={(event) =>
                 this.setState({
-                  translateSS: event.nativeEvent.layout.height
-                })}
-              
+                  translateSS: event.nativeEvent.layout.height,
+                })
+              }
             >
               <InfoView data={this.props.data} />
             </Animated.View>
