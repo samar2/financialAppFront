@@ -1,19 +1,18 @@
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
+
 import MenuTab from "./app/components/MenuTab";
-import Login from "./app/components/LogIn";
-//import SignUp from "./app/components/SignUp";
+//import Login from "./app/components/LogIn";
+import SignUp from "./app/components/SignUp";
 import AddGoalSavings from "./app/components/AddGoalSavings";
 import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
 //import InfoView from "./app/components/InfoView";
 //import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
+//import BackHandler from "./app/components/BackHandler";
 //import Reports from "./app/components/Reports";
-export default function App() {
-  return (
-    <NavigationContainer>{class App extends React.Component {
+
+class App extends React.Component {
   state = {
     incomes: [],
     expenses: [],
@@ -341,7 +340,7 @@ export default function App() {
     this.setState({ incomes: obj2, expenses: obj3 });
   }
   render() {
-    return <Login />;
+    return <MainStackNavigator />;
     // return (<>
     {
       /* <Login></Login> */
@@ -364,6 +363,7 @@ export default function App() {
     // );
   }
 }
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -374,7 +374,4 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 32,
   },
-});}</NavigationContainer>
-  );
-}
-
+});

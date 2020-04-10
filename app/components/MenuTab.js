@@ -123,7 +123,7 @@ export default class MenuTab extends React.Component {
               marginBottom: 20,
               height: 36,
               position: "relative",
-              backgroundColor: "#e1eab8",
+              backgroundColor: "#8173f0",
             }}
           >
             <Animated.View
@@ -133,7 +133,7 @@ export default class MenuTab extends React.Component {
                 height: "100%",
                 top: 0,
                 left: 0,
-                backgroundColor: "pink",
+                backgroundColor: "#a4e8aa",
                 borderRadius: 4,
                 transform: [
                   {
@@ -148,7 +148,7 @@ export default class MenuTab extends React.Component {
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
-                borderColor: "#170d2c",
+                borderColor: "#8173f0",
                 borderRadius: 4,
                 borderRightWidth: 0,
                 borderTopRightRadius: 0,
@@ -165,7 +165,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 0 ? "white" : "#170d2c",
+                  color: active === 0 ? "white" : "white",
                 }}
               >
                 Expenses
@@ -177,7 +177,7 @@ export default class MenuTab extends React.Component {
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
-                borderColor: "#170d2c",
+                borderColor: "#8173f0",
                 borderRadius: 4,
                 borderLeftWidth: 0,
                 borderTopLeftRadius: 0,
@@ -194,7 +194,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 1 ? "white" : "#170d2c",
+                  color: active === 1 ? "white" : "white",
                 }}
               >
                 Incomes
@@ -206,7 +206,7 @@ export default class MenuTab extends React.Component {
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
-                borderColor: "#007aff",
+                borderColor: "#8173f0",
                 borderRadius: 4,
                 borderRightWidth: 0,
                 borderTopRightRadius: 0,
@@ -223,7 +223,7 @@ export default class MenuTab extends React.Component {
             >
               <Text
                 style={{
-                  color: active === 2 ? "white" : "#170d2c",
+                  color: active === 2 ? "white" : "white",
                 }}
               >
                 OverView

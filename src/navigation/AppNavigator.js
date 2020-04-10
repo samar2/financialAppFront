@@ -174,9 +174,9 @@ class MainTabNavigator extends React.Component {
     return (
       <Tab.Navigator
         tabBarOptions={{
-          activeTintColor: "#e1eab8",
+          activeTintColor: "white",
           style: {
-            backgroundColor: "#170d2c",
+            backgroundColor: "#74b37a",
           },
         }}
         screenOptions={({ route }) => ({
@@ -216,12 +216,12 @@ function MainStackNavigator() {
         screenOptions={{
           gestureEnabled: true,
           headerStyle: {
-            backgroundColor: "#170d2c",
+            backgroundColor: "#74b37a",
           },
           headerTitleStyle: {
             fontWeight: "bold",
           },
-          headerTintColor: "#e1eab8",
+          headerTintColor: "white",
           headerBackTitleVisible: false,
         }}
         headerMode="float"

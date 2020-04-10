@@ -11,7 +11,7 @@ export default class InfoView extends React.Component {
     income: 0,
     expense: 0,
     expensesByCat: [],
-    incomesByCat: []
+    incomesByCat: [],
   };
   componentDidMount() {
     const budget = this.props.data.reduce(
@@ -24,10 +24,10 @@ export default class InfoView extends React.Component {
       0
     );
     const expense = Math.abs(budget - income);
-    const arrIncome = this.props.data.filter(item => item.type === "income");
+    const arrIncome = this.props.data.filter((item) => item.type === "income");
     var holder = {};
 
-    arrIncome.forEach(function(d) {
+    arrIncome.forEach(function (d) {
       if (holder.hasOwnProperty(d.category)) {
         holder[d.category] = holder[d.category] + d.amount;
       } else {
@@ -41,10 +41,12 @@ export default class InfoView extends React.Component {
       obj2.push({ category: prop, amount: holder[prop], currency: "$" });
     }
 
-    const arrExpense = this.props.data.filter(item => item.type === "expense");
+    const arrExpense = this.props.data.filter(
+      (item) => item.type === "expense"
+    );
     var holder2 = {};
 
-    arrExpense.forEach(function(d) {
+    arrExpense.forEach(function (d) {
       if (holder2.hasOwnProperty(d.category)) {
         holder2[d.category] = holder2[d.category] + d.amount;
       } else {
@@ -63,7 +65,7 @@ export default class InfoView extends React.Component {
       income,
       expense,
       incomesByCat: obj2,
-      expensesByCat: obj3
+      expensesByCat: obj3,
     });
   }
 
@@ -81,7 +83,7 @@ export default class InfoView extends React.Component {
             marginTop: 40,
             marginBottom: 20,
             height: 55,
-            position: "relative"
+            position: "relative",
           }}
         >
           <TouchableOpacity
@@ -97,14 +99,14 @@ export default class InfoView extends React.Component {
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
               backgroundColor:
-                this.state.active === "expense" ? "#de3b3b" : "#fff"
+                this.state.active === "expense" ? "#de3b3b" : "#fff",
             }}
             onPress={() => this.setState({ active: "expense" })}
           >
             <Text
               style={{
                 color: this.state.active === "expense" ? "#fff" : "#de3b3b",
-                textAlign: "center"
+                textAlign: "center",
               }}
             >
               Expenses{"\n"}
@@ -119,20 +121,20 @@ export default class InfoView extends React.Component {
               justifyContent: "center",
               alignItems: "center",
               borderWidth: 1,
-              borderColor: "#2d9547",
+              borderColor: "#8173f0",
               borderRadius: 4,
               borderRightWidth: 0,
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
               backgroundColor:
-                this.state.active === "income" ? "#2d9547" : "#fff"
+                this.state.active === "income" ? "#a4e8aa" : "#8173f0",
             }}
             onPress={() => this.setState({ active: "income" })}
           >
             <Text
               style={{
-                color: this.state.active === "income" ? "#fff" : "#2d9547",
-                textAlign: "center"
+                color: this.state.active === "income" ? "white" : "white",
+                textAlign: "center",
               }}
             >
               Incomes{"\n"}
@@ -143,7 +145,7 @@ export default class InfoView extends React.Component {
         </View>
         <View style={styles.mainContainer}>
           {this.state.active === "income"
-            ? this.state.incomesByCat.map(transaction => (
+            ? this.state.incomesByCat.map((transaction) => (
                 <View style={{ height: 55 }} key={transaction.category + "inc"}>
                   <View style={styles.containerLabels}>
                     <Text style={styles.labelCategory}>
@@ -152,7 +154,8 @@ export default class InfoView extends React.Component {
                     <Text
                       style={{
                         ...styles.labelAmount,
-                        color: this.state.active === "expense" ? "red" : "green"
+                        color:
+                          this.state.active === "expense" ? "blue" : "green",
                       }}
                     >
                       {transaction.amount}
@@ -163,7 +166,7 @@ export default class InfoView extends React.Component {
                     <Ionicons
                       name="md-heart"
                       size={32}
-                      color="orange"
+                      color="#8173f0"
                       style={styles.icon}
                     />
                     <Progress.Bar
@@ -189,7 +192,7 @@ export default class InfoView extends React.Component {
                   </View>
                 </View>
               ))
-            : this.state.expensesByCat.map(transaction => (
+            : this.state.expensesByCat.map((transaction) => (
                 <View style={{ height: 55 }} key={transaction.category + "exp"}>
                   <View style={styles.containerLabels}>
                     <Text style={styles.labelCategory}>
@@ -198,7 +201,8 @@ export default class InfoView extends React.Component {
                     <Text
                       style={{
                         ...styles.labelAmount,
-                        color: this.state.active === "expense" ? "red" : "green"
+                        color:
+                          this.state.active === "expense" ? "blue" : "green",
                       }}
                     >
                       {transaction.amount}
@@ -209,7 +213,7 @@ export default class InfoView extends React.Component {
                     <Ionicons
                       name="md-heart"
                       size={32}
-                      color="orange"
+                      color="#8173f0"
                       style={styles.icon}
                     />
                     <Progress.Bar
@@ -303,44 +307,44 @@ const styles = StyleSheet.create({
   mainContainer: {
     /* height: 500, */
     flexDirection: "column",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   container: {
     flex: 1,
     flexDirection: "row",
 
     justifyContent: "flex-start",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   containerLabels: {
     flex: 1,
     flexDirection: "row",
 
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   text: {
     marginLeft: 10,
-    color: "gray"
+    color: "gray",
   },
   labelCategory: {
     fontSize: 18,
     width: "30%",
-    marginLeft: "10%"
+    marginLeft: "10%",
   },
   labelAmount: {
     fontSize: 18,
-    marginRight: "20%"
+    marginRight: "20%",
   },
   icon: {
     width: "10%",
-    marginLeft: 5
+    marginLeft: 5,
   },
   bar: {
-    height: 20
+    height: 20,
   },
   budgetTitle: {
     fontSize: 20,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

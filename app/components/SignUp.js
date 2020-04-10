@@ -4,13 +4,13 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
-  View
+  View,
 } from "react-native";
 
 export default class App extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
 
   render() {
@@ -21,8 +21,8 @@ export default class App extends React.Component {
             <TextInput
               style={styles.inputText}
               placeholder="Full Name: "
-              placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ name: text })}
+              placeholderTextColor="white"
+              onChangeText={(text) => this.setState({ name: text })}
             />
           </View>
 
@@ -31,8 +31,8 @@ export default class App extends React.Component {
               style={styles.inputText}
               placeholder="Email :"
               secureTextEntry={true}
-              placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ email: text })}
+              placeholderTextColor="white"
+              onChangeText={(text) => this.setState({ email: text })}
             />
           </View>
 
@@ -41,8 +41,8 @@ export default class App extends React.Component {
               style={styles.inputText}
               placeholder="Password :"
               secureTextEntry={true}
-              placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ password: save })}
+              placeholderTextColor="white"
+              onChangeText={(text) => this.setState({ password: save })}
             />
           </View>
 
@@ -51,17 +51,16 @@ export default class App extends React.Component {
               style={styles.inputText}
               placeholder="Confirm Password :"
               secureTextEntry={true}
-              placeholderTextColor="#003f5c"
-              onChangeText={text => this.setState({ confirmpassword: save })}
+              placeholderTextColor="white"
+              onChangeText={(text) => this.setState({ confirmpassword: save })}
             />
           </View>
-
-          <TouchableOpacity>
-            <Text style={styles.Signup}>SignUp</Text>
+          <TouchableOpacity style={styles.SignUpBtn}>
+            <Text style={styles.SignUpText}>SIGN UP</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.loginText}>Continue</Text>
+          <TouchableOpacity style={styles.Contiue}>
+            <Text style={styles.ContinueText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </>
@@ -72,52 +71,53 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white", //170d2c
+    backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center"
-  },
-  Signup: {
-    flex: 0,
-    color: "black",
-    fontSize: 20,
-    position: "relative"
-  },
-  logo: {
-    fontWeight: "bold",
-    fontSize: 50,
-    color: "#fb5b5a",
-    marginBottom: 40
-  },
-  inputView: {
-    width: "80%",
-    //backgroundColor: "#465881",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
     justifyContent: "center",
-    padding: 20
   },
-  inputText: {
-    height: 50,
-    color: "white"
-  },
-
-  loginBtn: {
+  SignUpBtn: {
     width: "80%",
-    // backgroundColor: "#fb5b5a",
+    backgroundColor: "#74b37a",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    marginBottom: 10
+    marginBottom: 10,
   },
-  SignupText: {
+  logo: {
+    fontWeight: "bold",
+    fontSize: 50,
+    color: "#fb5b5a",
+    marginBottom: 40,
+  },
+  inputView: {
     width: "80%",
-    // backgroundColor: "#fb5b5a",
+    backgroundColor: "#8173f0",
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: "center",
+    padding: 20,
+  },
+  inputText: {
+    height: 50,
+    color: "white",
+  },
+
+  loginBtn: {
+    width: "80%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+    marginTop: 40,
+    marginBottom: 10,
+  },
+  SignUpText: {
+    color: "white",
+  },
+  ContinueText: {
+    color: "#78ad7c",
+  },
 });
