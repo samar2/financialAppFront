@@ -339,6 +339,19 @@ class App extends React.Component {
     }
     this.setState({ incomes: obj2, expenses: obj3 });
   }
+  /* async componentDidMount(){
+    const response = await fetch('http://192.168.1.105:8000/api/transactions',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4NjYyMzgxNSwiZXhwIjoxNTg2NjI3NDE1LCJuYmYiOjE1ODY2MjM4MTUsImp0aSI6IjQxbHpXMXVkRmlCcVdhRDgiLCJzdWIiOjExLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.uqadaHVWl2_Q_VaycbjoP-BOva6Y81qB2_FrHdExmLg`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const result = await response.json();
+    console.log(result);
+    this.setState({transactions:result});
+  } */
   render() {
     return <MainStackNavigator />;
     // return (<>

@@ -250,7 +250,10 @@ export default class MenuTab extends React.Component {
             >
               {/* add expense view here */}
               <ListNew
-                data={this.props.data.filter((item) => {
+                /* data={this.props.data.filter((item) => {
+                  return item.type === "expense";
+                })} */
+                data={this.props.transactions.filter((item) => {
                   return item.type === "expense";
                 })}
                 deleteItem={this.props.deleteItem}
@@ -279,7 +282,10 @@ export default class MenuTab extends React.Component {
             >
               <AddIncome addItem={this.props.addItem} />
               <ListNew
-                data={this.props.data.filter((item) => {
+                /* data={this.props.data.filter((item) => {
+                  return item.type === "income";
+                })} */
+                data={this.props.transactions.filter((item) => {
                   return item.type === "income";
                 })}
                 deleteItem={this.props.deleteItem}
@@ -305,7 +311,7 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <InfoView data={this.props.data} />
+              <InfoView data={this.props.transactions} />
             </Animated.View>
           </ScrollView>
         </View>

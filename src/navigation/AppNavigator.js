@@ -30,6 +30,7 @@ class MainTabNavigator extends React.Component {
   state = {
     incomes: [],
     expenses: [],
+    transactions:[],
     data: [
       {
         id: 1,
@@ -169,6 +170,19 @@ class MainTabNavigator extends React.Component {
     });
     this.setState({ data });
   };
+  async componentDidMount(){
+    const response = await fetch('http://192.168.1.105:8000/api/transactions',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4NjYzMDI4OCwiZXhwIjoxNTg2NjMzODg4LCJuYmYiOjE1ODY2MzAyODgsImp0aSI6InFUWXE3NXVKcXpPTm1JZ0giLCJzdWIiOjExLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.arXsRfuqBA2vSXM3C8s9_xkNYbgJ-EoauxafMGZrukQ`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const result = await response.json();
+    console.log(result);
+    this.setState({transactions:result.transaction});
+  }
 
   render() {
     return (
@@ -199,6 +213,7 @@ class MainTabNavigator extends React.Component {
               deleteItem={this.deleteItem}
               addItem={this.addItem}
               editItem={this.editItem}
+              transactions={this.state.transactions}
             />
           )}
         />

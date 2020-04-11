@@ -28,10 +28,10 @@ export default class InfoView extends React.Component {
     var holder = {};
 
     arrIncome.forEach(function (d) {
-      if (holder.hasOwnProperty(d.category)) {
-        holder[d.category] = holder[d.category] + d.amount;
+      if (holder.hasOwnProperty(d.category.name)) {
+        holder[d.category.name] = holder[d.category.name] + d.amount;
       } else {
-        holder[d.category] = d.amount;
+        holder[d.category.name] = d.amount;
       }
     });
 
@@ -47,10 +47,10 @@ export default class InfoView extends React.Component {
     var holder2 = {};
 
     arrExpense.forEach(function (d) {
-      if (holder2.hasOwnProperty(d.category)) {
-        holder2[d.category] = holder2[d.category] + d.amount;
+      if (holder2.hasOwnProperty(d.category.name)) {
+        holder2[d.category.name] = holder2[d.category.name] + d.amount;
       } else {
-        holder2[d.category] = d.amount;
+        holder2[d.category.name] = d.amount;
       }
     });
 
