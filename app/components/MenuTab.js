@@ -258,6 +258,8 @@ export default class MenuTab extends React.Component {
                 })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
+                currencies={this.props.currencies}
+                categories={this.props.categories}
               />
             </Animated.View>
 
@@ -280,7 +282,7 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <AddIncome addItem={this.props.addItem} />
+              <AddIncome addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
               <ListNew
                 /* data={this.props.data.filter((item) => {
                   return item.type === "income";
@@ -290,6 +292,8 @@ export default class MenuTab extends React.Component {
                 })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
+                currencies={this.props.currencies}
+                categories={this.props.categories}
               />
             </Animated.View>
             <Animated.View
