@@ -7,7 +7,7 @@ import {
   PanResponder,
   TouchableOpacity,
   Easing,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import { Icon } from "react-native-elements";
 
@@ -54,9 +54,9 @@ class Item extends React.Component {
       },
       onPanResponderTerminate: () => {
         Animated.spring(this.position, {
-          toValue: { x: 0, y: 0 }
+          toValue: { x: 0, y: 0 },
         }).start();
-      }
+      },
     });
 
     this.position = position;
@@ -66,32 +66,32 @@ class Item extends React.Component {
   getRightButtonProps() {
     const opacity = this.position.x.interpolate({
       inputRange: [-SCREEN_WIDTH, -100, -35],
-      outputRange: [0, 1, 0]
+      outputRange: [0, 1, 0],
     });
     return {
-      opacity
+      opacity,
     };
   }
 
   getLeftButtonProps() {
     const opacity = this.position.x.interpolate({
       inputRange: [35, 75, 320],
-      outputRange: [0, 1, 0.25]
+      outputRange: [0, 1, 0.25],
     });
     const width = this.position.x.interpolate({
       inputRange: [0, 70],
-      outputRange: [0, 70]
+      outputRange: [0, 70],
     });
     return {
       opacity,
-      width
+      width,
     };
   }
 
   resetPosition() {
     Animated.timing(this.position, {
       toValue: { x: 0, y: 0 },
-      duration: 200
+      duration: 200,
     }).start();
   }
 
@@ -100,7 +100,7 @@ class Item extends React.Component {
     //const x=-SCREEN_WIDTH;
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
-      duration: FORCING_DURATION
+      duration: FORCING_DURATION,
     }).start(() => {} /* this.props.cleanFromScreen(this.props.id) */);
     callback();
   }
@@ -138,16 +138,12 @@ class Item extends React.Component {
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
       duration: 400,
-      easing: Easing.out(Easing.quad)
+      easing: Easing.out(Easing.quad),
     }).start(() => this.enableScrollView(true));
   }
 
   render() {
-    const {
-      containerStyle,
-      textContainer,
-      rightButtonContainer
-    } = styles;
+    const { containerStyle, textContainer, rightButtonContainer } = styles;
     return (
       <View style={containerStyle}>
         <Animated.View // THE CONTENT OF ITEM
@@ -166,7 +162,7 @@ class Item extends React.Component {
           style={[
             rightButtonContainer,
             { left: SCREEN_WIDTH / 1.7 },
-            this.getRightButtonProps()
+            this.getRightButtonProps(),
           ]}
         >
           <TouchableOpacity
@@ -182,8 +178,8 @@ class Item extends React.Component {
         <Animated.View
           style={[
             rightButtonContainer,
-            { backgroundColor: "#FFC400" },
-            this.getRightButtonProps()
+            { backgroundColor: "#a4e8aa" },
+            this.getRightButtonProps(),
           ]}
         >
           <TouchableOpacity onPress={() => this.props.editButtonPressed()}>
@@ -206,7 +202,7 @@ const styles = StyleSheet.create({
     paddingVertical: 23,
     backgroundColor: "#50f442",
     position: "absolute",
-    elevation: 3
+    elevation: 3,
   },
   containerStyle: {
     flex: 1,
@@ -214,19 +210,20 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 5,
     marginTop: 30,
-    elevation: 3
+    elevation: 3,
   },
   textContainer: {
     paddingHorizontal: 30,
     paddingVertical: 35,
     width: SCREEN_WIDTH / 1.03,
     borderRadius: 7,
-    backgroundColor: "#CFD8DC",
+    backgroundColor: "#8173f0",
     elevation: 3,
-    zIndex: 2
+    zIndex: 2,
   },
   textStyle: {
-    fontSize: 15
+    fontSize: 15,
+    color: "white",
   },
   rightButtonContainer: {
     position: "absolute",
@@ -239,9 +236,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 23,
     elevation: 3,
-    backgroundColor: "#D50000",
-    zIndex: 1
-  }
+    backgroundColor: "#ea040c",
+    zIndex: 1,
+  },
 });
 
 export default Item;

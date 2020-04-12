@@ -7,7 +7,8 @@ import { Ionicons } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import Detail from "../screens/Detail";
 import Settings from "../screens/Settings";
-import Profile from "../screens/Profile";
+import Goals from "../screens/Goals";
+import Categories from "../screens/Categories";
 import MenuTab from "../../app/components/MenuTab";
 import Login from "../../app/components/LogIn";
 const Stack = createStackNavigator();
@@ -21,8 +22,8 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case "Dashboard":
       return "Dashboard";
-    case "Profile":
-      return "Profile";
+    case "Goals":
+      return "Goals";
   }
 }
 
@@ -184,7 +185,9 @@ class MainTabNavigator extends React.Component {
             let iconName;
             if (route.name == "Dashboard") {
               iconName = "ios-home";
-            } else if (route.name == "Profile") {
+            } else if (route.name == "Goals") {
+              iconName = "ios-person";
+            } else if (route.name == "Categories") {
               iconName = "ios-person";
             }
             return <Ionicons name={iconName} color={color} size={size} />;
@@ -202,7 +205,7 @@ class MainTabNavigator extends React.Component {
             />
           )}
         />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Goals" component={Goals} />
       </Tab.Navigator>
     );
   }

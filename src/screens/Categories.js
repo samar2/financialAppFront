@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-function Profile(props) {
+function Categories(props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Profile Tab</Text>
+      <Text style={styles.text}>Categories Tab</Text>
     </View>
   );
 }
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default Categories;

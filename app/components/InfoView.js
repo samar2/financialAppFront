@@ -178,6 +178,7 @@ export default class InfoView extends React.Component {
                       width={200}
                       height={20}
                       style={styles.bar}
+                      color="#8173f0"
                     />
                     <Text style={styles.text}>
                       {this.state.active === "expense"
@@ -225,6 +226,7 @@ export default class InfoView extends React.Component {
                       width={200}
                       height={20}
                       style={styles.bar}
+                      color="#8173f0"
                     />
                     <Text style={styles.text}>
                       {this.state.active === "expense"
@@ -312,7 +314,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
