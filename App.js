@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
 
 import MenuTab from "./app/components/MenuTab";
-//import Login from "./app/components/LogIn";
+import Login from "./app/components/LogIn";
 import SignUp from "./app/components/SignUp";
 import AddGoalSavings from "./app/components/AddGoalSavings";
 import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
@@ -353,7 +353,7 @@ class App extends React.Component {
     this.setState({transactions:result});
   } */
   render() {
-    return <MainStackNavigator />;
+    return <Login />;
     // return (<>
     {
       /* <Login></Login> */
