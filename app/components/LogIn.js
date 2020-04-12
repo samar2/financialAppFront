@@ -5,13 +5,79 @@ import {
   TouchableOpacity,
   Text,
   View,
+  AsyncStorage,
 } from "react-native";
 
+const ACCESS_TOKEN = "access_token";
+
 export default class App extends React.Component {
-  state = {
-    email: "",
-    password: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      error: "",
+    };
+  }
+
+  componentDidMount() {
+    this.initialState().done();
+  }
+
+  initialState = async () => {
+    let token = await AsyncStorage.getItem(ACCESS_TOKEN);
+    if (token !== null) {
+      this.props.navigation.navigate("App");
+    }
   };
+
+  async storeToken(accessToken) {
+    try {
+      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+      this.getToken();
+    } catch (error) {
+      console.log("error");
+    }
+  }
+
+  async getToken() {
+    try {
+      let token = await AsyncStorage.getItem(ACCESS_TOKEN);
+      console.log("token" + token);
+    } catch (error) {
+      console.log("error");
+    }
+  }
+
+  async onLoginButtonPress() {
+    try {
+      let response = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      });
+
+      let res = await response.json();
+      if (response.status >= 200 && response.status < 300) {
+        this.setState({ error: "" });
+        let accessToken = res.accesstoken;
+        this.storeToken(accessToken);
+        console.log(accessToken);
+        this.props.navigation.navigate("App");
+      } else {
+        let error = res;
+        throw error;
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
   render() {
     return (
@@ -32,7 +98,7 @@ export default class App extends React.Component {
               placeholder="Password :"
               secureTextEntry={true}
               placeholderTextColor="white"
-              onChangeText={(text) => this.setState({ password: save })}
+              onChangeText={(text) => this.setState({ password: text })}
             />
           </View>
 
@@ -44,7 +110,10 @@ export default class App extends React.Component {
             <Text style={styles.loginText}>LOG IN</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.SignUpBtn}>
+          <TouchableOpacity
+            style={styles.SignUpBtn}
+            onPress={this.onLoginButtonPress.bind(this)}
+          >
             <Text style={styles.SignUpText}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
