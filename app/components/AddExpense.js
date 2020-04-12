@@ -3,7 +3,7 @@ import { Text, Button, View , TextInput, Picker} from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Modal from "react-native-modal";
 
-export default class AddIncome extends React.Component {
+export default class AddExpense extends React.Component {
   state = {
     isModalVisible: false,
     title: "",
@@ -25,7 +25,7 @@ export default class AddIncome extends React.Component {
   };
 
   toggleModal = () => {
-    this.props.addItem({title:this.state.title,description:this.state.description, start_date:this.state.start_date, end_date:this.state.end_date, amount:this.state.amount, currency:this.state.currency, type:"income", kind:this.state.kind, category:this.state.category})
+    this.props.addItem({title:this.state.title,description:this.state.description, start_date:this.state.start_date, end_date:this.state.end_date, amount:this.state.amount, currency:this.state.currency, type:"expense", kind:this.state.kind, category:this.state.category})
     this.setState({ isModalVisible: false , title:"", description:"", start_date:"", currency:"", amount:"",end_date:"",category:"", kind:""});
   };
   onChange = (event, selectedDate) => {
@@ -56,7 +56,7 @@ export default class AddIncome extends React.Component {
     return (
       <>
         <Button
-          title="ADD INCOME"
+          title="ADD EXPENSE"
           onPress={() => this.setState({ isModalVisible: true })}
         ></Button>
         <Modal isVisible={this.state.isModalVisible}

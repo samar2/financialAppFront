@@ -18,7 +18,6 @@ export default class InfoView extends React.Component {
       (a, b) => a + (b.type == "income" ? b.amount : -b.amount),
       0
     );
-    // console.log(budget);
     const income = this.props.data.reduce(
       (a, b) => a + (b.type == "income" ? b.amount : 0),
       0
@@ -29,22 +28,18 @@ export default class InfoView extends React.Component {
 
     arrIncome.forEach(function (d) {
       if (holder.hasOwnProperty(d.category.name)) {
-        holder[d.category.name] ={amount: d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
+        holder[d.category.name] ={amount: holder[d.category.name].amount+d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
         
       } else {
         holder[d.category.name] = {amount:d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
         
       }
     });
-
+    console.log(holder)
     var obj2 = [];
-   // console.log(holder)
     for (var prop in holder) {
-      //console.log(prop)
       obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });
     }
-   // console.log(obj2)
-    //console.log(holder2)
     const arrExpense = this.props.data.filter(
       (item) => item.type === "expense"
     );
@@ -52,7 +47,7 @@ export default class InfoView extends React.Component {
 
     arrExpense.forEach(function (d) {
       if (holder2.hasOwnProperty(d.category.name)) {
-        holder2[d.category.name] ={amount: d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
+        holder2[d.category.name] ={amount: holder2[d.category.name].amount+d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
         
       } else {
         holder2[d.category.name] = {amount:d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
@@ -64,7 +59,6 @@ export default class InfoView extends React.Component {
     for (var prop in holder2) {
       obj3.push({ category: holder2[prop].category, amount: holder2[prop].amount, currency: holder2[prop].currency, icon:holder2[prop].icon });
     }
-    console.log(obj3)
     this.setState({
       budget,
       income,
