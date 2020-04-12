@@ -150,11 +150,11 @@ class Item extends React.Component {
           style={[textContainer, this.position.getLayout()]}
           {...this.panResponder.panHandlers}
         >
-          <Text style={styles.textStyle}>{this.props.item.category}</Text>
+          <Text style={styles.textStyle}>{this.props.item.category.title}</Text>
           <Text style={styles.textStyle}>{this.props.item.title}</Text>
           <Text style={styles.textStyle}>
             {this.props.item.amount}
-            {this.props.item.currency}
+            {this.props.item.currency.symbol}
           </Text>
         </Animated.View>
 

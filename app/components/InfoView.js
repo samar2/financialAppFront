@@ -28,38 +28,43 @@ export default class InfoView extends React.Component {
     var holder = {};
 
     arrIncome.forEach(function (d) {
-      if (holder.hasOwnProperty(d.category)) {
-        holder[d.category] = holder[d.category] + d.amount;
+      if (holder.hasOwnProperty(d.category.name)) {
+        holder[d.category.name] ={amount: d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
+        
       } else {
-        holder[d.category] = d.amount;
+        holder[d.category.name] = {amount:d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
+        
       }
     });
 
     var obj2 = [];
-
+   // console.log(holder)
     for (var prop in holder) {
-      obj2.push({ category: prop, amount: holder[prop], currency: "$" });
+      //console.log(prop)
+      obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });
     }
-
+   // console.log(obj2)
+    //console.log(holder2)
     const arrExpense = this.props.data.filter(
       (item) => item.type === "expense"
     );
     var holder2 = {};
 
     arrExpense.forEach(function (d) {
-      if (holder2.hasOwnProperty(d.category)) {
-        holder2[d.category] = holder2[d.category] + d.amount;
+      if (holder2.hasOwnProperty(d.category.name)) {
+        holder2[d.category.name] ={amount: d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
+        
       } else {
-        holder2[d.category] = d.amount;
+        holder2[d.category.name] = {amount:d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
       }
     });
 
     var obj3 = [];
 
     for (var prop in holder2) {
-      obj3.push({ category: prop, amount: holder2[prop], currency: "$" });
+      obj3.push({ category: holder2[prop].category, amount: holder2[prop].amount, currency: holder2[prop].currency, icon:holder2[prop].icon });
     }
-
+    console.log(obj3)
     this.setState({
       budget,
       income,
@@ -164,7 +169,7 @@ export default class InfoView extends React.Component {
                   </View>
                   <View style={styles.container}>
                     <Ionicons
-                      name="md-heart"
+                      name={transaction.icon}
                       size={32}
                       color="#8173f0"
                       style={styles.icon}
@@ -176,7 +181,7 @@ export default class InfoView extends React.Component {
                           : transaction.amount / this.state.income
                       }
                       width={200}
-                      height={20}
+                      height={25}
                       style={styles.bar}
                       color="#8173f0"
                     />
@@ -212,7 +217,7 @@ export default class InfoView extends React.Component {
                   </View>
                   <View style={styles.container}>
                     <Ionicons
-                      name="md-heart"
+                      name={transaction.icon}
                       size={32}
                       color="#8173f0"
                       style={styles.icon}
@@ -224,7 +229,7 @@ export default class InfoView extends React.Component {
                           : transaction.amount / this.state.income
                       }
                       width={200}
-                      height={20}
+                      height={25}
                       style={styles.bar}
                       color="#8173f0"
                     />
@@ -342,7 +347,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   bar: {
-    height: 20,
+    height: 25,
   },
   budgetTitle: {
     fontSize: 20,
