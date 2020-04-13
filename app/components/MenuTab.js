@@ -257,8 +257,8 @@ export default class MenuTab extends React.Component {
                   return item.type === "expense";
                 })} */
                 data={this.props.transactions.filter((item) => {
-                  return item.type === "expense";
-                })}
+                  return item.type === "expense"&& ((item.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&item.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && item.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) ));
+               })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
                 currencies={this.props.currencies}
@@ -288,7 +288,7 @@ export default class MenuTab extends React.Component {
               <AddIncome addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
               <ListNew
                 data={this.props.transactions.filter((item) => {
-                  return item.type === "income";
+                  return item.type === "income"&& ((item.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&item.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && item.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) ));
                 })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}

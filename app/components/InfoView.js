@@ -14,16 +14,16 @@ export default class InfoView extends React.Component {
     incomesByCat: [],
   };
   componentDidMount() {
-    const budget = this.props.data.reduce(
-      (a, b) => a + (b.type == "income" ? b.amount : -b.amount),
+    const expense = this.props.data.reduce(
+      (a, b) => a + (b.type == "expense"&&((b.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&b.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(b.kind==='recurring' &&b.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(b.kind==='recurring' &&b.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && b.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) )) ? b.amount : 0),
       0
     );
     const income = this.props.data.reduce(
-      (a, b) => a + (b.type == "income" ? b.amount : 0),
+      (a, b) => a + (b.type == "income"&&((b.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&b.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(b.kind==='recurring' &&b.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(b.kind==='recurring' &&b.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && b.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) )) ? b.amount : 0),
       0
     );
-    const expense = Math.abs(budget - income);
-    const arrIncome = this.props.data.filter((item) => item.type === "income");
+    const budget = income - expense;
+    const arrIncome = this.props.data.filter((item) => item.type === "income" && ((item.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&item.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && item.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) )));
     var holder = {};
 
     arrIncome.forEach(function (d) {
@@ -41,7 +41,7 @@ export default class InfoView extends React.Component {
       obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });
     }
     const arrExpense = this.props.data.filter(
-      (item) => item.type === "expense"
+      (item) => item.type === "expense"&& ((item.start_date.split("-")[1]==((new Date()).getUTCMonth() + 1) &&item.start_date.split("-")[0]===""+(new Date()).getUTCFullYear())||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+(new Date()).getUTCFullYear() )||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(new Date()).getUTCFullYear() && item.end_date.split("-")[1]>=((new Date()).getUTCMonth() + 1) ))
     );
     var holder2 = {};
 

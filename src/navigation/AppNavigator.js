@@ -132,7 +132,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -180,7 +180,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -192,7 +192,7 @@ class MainTabNavigator extends React.Component {
       const response2 = await fetch(`http://192.168.1.105:8000/api/categories/${result.transaction.categories_id}`,{
         method: 'GET',
         headers: {
-          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
          
           'Accept': 'application/json'
         }});
@@ -201,7 +201,7 @@ class MainTabNavigator extends React.Component {
         const response3 = await fetch(`http://192.168.1.105:8000/api/currencies/${result.transaction.currencies_id}`,{
         method: 'GET',
         headers: {
-          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
          
           'Accept': 'application/json'
         }});
@@ -225,7 +225,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -253,7 +253,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -263,7 +263,7 @@ class MainTabNavigator extends React.Component {
     const response2 = await fetch('http://192.168.1.105:8000/api/currencies',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -272,7 +272,7 @@ class MainTabNavigator extends React.Component {
     const response3 = await fetch('http://192.168.1.105:8000/api/categories',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
