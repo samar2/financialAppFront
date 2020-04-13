@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, Text ,AsyncStorage} from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
 import Login from "./app/components/LogIn";
 /* import MenuTab from "./app/components/MenuTab";
@@ -16,241 +16,12 @@ class App extends React.Component {
   state = {
     incomes: [],
     expenses: [],
-    data: [
-      {
-        id: 1,
-        category: "Salary",
-        title: "Work 1",
-        description: "something",
-        amount: 500,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 2,
-        category: "Salary",
-        title: "Work 2",
-        description: "something",
-        amount: 300,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 3,
-        category: "Salary",
-        title: "Work 13",
-        description: "something",
-        amount: 250,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 4,
-        category: "Extra",
-        description: "something",
-        title: "Freelance",
-        amount: 700,
-        currency: "$",
-        date: "11/03/2020",
-        type: "income",
-      },
-      {
-        id: 5,
-        category: "Fun",
-        description: "something",
-        title: "Lottery",
-        amount: 10,
-        currency: "$",
-        date: "07/03/2020",
-        type: "income",
-      },
-      {
-        id: 6,
-        category: "Extra",
-        description: "something",
-        title: "Sold TV",
-        amount: 140,
-        currency: "$",
-        date: "12/03/2020",
-        type: "income",
-      },
-      {
-        id: 7,
-        category: "Extra",
-        description: "something",
-        title: "gift",
-        amount: 50,
-        currency: "$",
-        date: "17/03/2020",
-        type: "income",
-      },
-      {
-        id: 8,
-        category: "Utilities",
-        description: "monthly bill",
-        title: "Gas",
-        amount: 50,
-        currency: "$",
-        date: "18/03/2020",
-        type: "expense",
-      },
-      {
-        id: 8,
-        category: "Loans",
-        description: "taken from bank",
-        title: "House",
-        amount: 300,
-        currency: "$",
-        date: "18/03/2020",
-        type: "expense",
-      },
-    ],
+    loggedIn:false
+    
   };
-  deleteItem = (id) => {
-    const data = this.state.data.filter((item) => {
-      return item.id !== id;
-    });
-    this.setState({ data });
-  };
-  addItem = (props) => {
-    const data = [...this.state.data];
-    const id = data[data.length - 1].id + 1;
-    const item = {
-      id: id,
-      category: props.category,
-      description: props.description,
-      title: props.title,
-      amount: props.amount,
-      currency: props.currency,
-      date: props.date,
-      type: props.type,
-    };
-    data.push(item);
-    this.setState({ data });
-  };
-  editItem = (id, props) => {
-    const data = this.state.data.map((item) => {
-      // if this is the contact we need to change, update it. This will apply to exactly
-      // one contact
-      if (item.id === id) {
-        const newItem = {
-          id: item.id,
-          category: props.category || item.category,
-          description: props.description || item.description,
-          title: props.title || item.title,
-          amount: props.amount || item.amount,
-          currency: props.currency || item.currency,
-          date: props.date || item.date,
-          type: props.type || item.type,
-        };
-        return newItem;
-      }
-      // otherwise, don't change the transaction at all
-      else {
-        return item;
-      }
-    });
-    this.setState({ data });
-  };
+ 
 
-  /*  state = {
-    goals: [],
-    data: [
-      {
-        id: 1,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 2,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 3,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 4,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 5,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 6,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 7,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 8,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      },
-      {
-        id: 8,
-        goalname: "Car",
-        description: "Honda",
-        start_date: "05 / 03 / 2020",
-        end_date: "05 / 03 / 2020",
-        amount: 50,
-        currency: "$",
-        type: "goal"
-      }
-    ]
-  }; */
+ /*  
   deletegoal = (id) => {
     const data = this.state.data.filter((item) => {
       return item.id !== id;
@@ -296,67 +67,42 @@ class App extends React.Component {
       }
     });
     this.setState({ data });
-  };
+  }; */
 
-  componentDidMount() {
-    const arrIncome = this.state.data.filter((item) => item.type === "income");
-    var holder = {};
-
-    arrIncome.forEach(function (d) {
-      if (holder.hasOwnProperty(d.category)) {
-        holder[d.category] = holder[d.category] + d.amount;
-      } else {
-        holder[d.category] = d.amount;
-      }
-    });
-
-    var obj2 = [];
-
-    for (var prop in holder) {
-      obj2.push({
-        category: prop,
-        amount: holder[prop],
-        currency: "$",
-      });
+  async getToken() {
+    try {
+      let token = await AsyncStorage.getItem('access_token');
+      console.log("token" + token);
+    } catch (error) {
+      console.log("error");
     }
-    const arrExpense = this.state.data.filter(
-      (item) => item.type === "expense"
-    );
-    var holder2 = {};
-
-    arrExpense.forEach(function (d) {
-      if (holder2.hasOwnProperty(d.category)) {
-        holder2[d.category] = holder2[d.category] + d.amount;
-      } else {
-        holder2[d.category] = d.amount;
-      }
-    });
-
-    var obj3 = [];
-
-    for (var prop in holder2) {
-      obj3.push({ category: prop, amount: holder2[prop], currency: "$" });
-    }
-    this.setState({ incomes: obj2, expenses: obj3 });
   }
-  /* async componentDidMount(){
-    const response = await fetch('http://192.168.1.105:8000/api/transactions',{
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4NjYyMzgxNSwiZXhwIjoxNTg2NjI3NDE1LCJuYmYiOjE1ODY2MjM4MTUsImp0aSI6IjQxbHpXMXVkRmlCcVdhRDgiLCJzdWIiOjExLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.uqadaHVWl2_Q_VaycbjoP-BOva6Y81qB2_FrHdExmLg`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    });
-    const result = await response.json();
-    console.log(result);
-    this.setState({transactions:result});
-  } */
+
+  isLoggedIn = ()=>{
+    this.setState({loggedIn:true})
+  }
+  isLoggedOut = ()=>{
+    console.log("i am here")
+    this.setState({loggedIn:false})
+  }
+  async componentDidMount() {
+  
+    const token = await this.getToken();
+    if(token)
+    console.log(token);
+    else
+    console.log("nope")
+   
+
+   
+  }
+  
   render() {
 
     return(<>
-{/* <MainStackNavigator/> */}
-<Login/>
+    {this.state.loggedIn?<MainStackNavigator isLoggedOut={this.isLoggedOut}/>:<Login isLoggedIn={this.isLoggedIn}/>}
+
+
 </>
     )
    

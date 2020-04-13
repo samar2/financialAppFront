@@ -1,4 +1,5 @@
 import * as React from "react";
+import {AsyncStorage} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,7 +11,7 @@ import Settings from "../screens/Settings";
 import Goals from "../screens/Goals";
 import Categories from "../screens/Categories";
 import MenuTab from "../../app/components/MenuTab";
-import Login from "../../app/components/LogIn";
+import Logout from "../../app/components/Logout";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -132,7 +133,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -180,7 +181,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -192,7 +193,7 @@ class MainTabNavigator extends React.Component {
       const response2 = await fetch(`http://192.168.1.105:8000/api/categories/${result.transaction.categories_id}`,{
         method: 'GET',
         headers: {
-          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+          'Authorization': `Bearer ${token}`,
          
           'Accept': 'application/json'
         }});
@@ -201,7 +202,7 @@ class MainTabNavigator extends React.Component {
         const response3 = await fetch(`http://192.168.1.105:8000/api/currencies/${result.transaction.currencies_id}`,{
         method: 'GET',
         headers: {
-          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+          'Authorization': `Bearer ${token}`,
          
           'Accept': 'application/json'
         }});
@@ -225,7 +226,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -250,10 +251,12 @@ class MainTabNavigator extends React.Component {
     this.setState({ transactions }); 
   };
   async componentDidMount(){
+    const token = await AsyncStorage.getItem('access_token');
+    console.log(token);
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -263,7 +266,7 @@ class MainTabNavigator extends React.Component {
     const response2 = await fetch('http://192.168.1.105:8000/api/currencies',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -272,7 +275,7 @@ class MainTabNavigator extends React.Component {
     const response3 = await fetch('http://192.168.1.105:8000/api/categories',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NzMwMDYsImV4cCI6MTU4Njc3NjYwNiwibmJmIjoxNTg2NzczMDA2LCJqdGkiOiJvcERNVko1SXc1U3pOdEZxIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.MsjCVq0H21b2h2HDL4jkj7xJU72W2mh4FY-IbmAM-xc`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -297,7 +300,10 @@ class MainTabNavigator extends React.Component {
             if (route.name == "Dashboard") {
               iconName = "ios-home";
             } else if (route.name == "Goals") {
-              iconName = "ios-person";
+              iconName = "ios-cash";
+            }
+            else if (route.name == "Logout") {
+              iconName = "ios-close-circle";
             } else if (route.name == "Categories") {
               iconName = "ios-person";
             }
@@ -320,12 +326,20 @@ class MainTabNavigator extends React.Component {
           )}
         />
         <Tab.Screen name="Goals" component={Goals} />
-      </Tab.Navigator>
+        <Tab.Screen name="Logout" component={(props)=>(
+          <Logout
+          isLoggedOut={this.props.isLoggedOut}
+          />
+        
+        )}
+        />
+       
+        </Tab.Navigator>
     );
   }
 }
 
-function MainStackNavigator() {
+function MainStackNavigator(props) {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -345,7 +359,7 @@ function MainStackNavigator() {
       >
         <Stack.Screen
           name="Dashboard"
-          component={MainTabNavigator}
+          component={()=><MainTabNavigator isLoggedOut={props.isLoggedOut}/>}
           options={({ route }) => ({
             headerTitle: getHeaderTitle(route),
           })}

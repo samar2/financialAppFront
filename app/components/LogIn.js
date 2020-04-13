@@ -27,7 +27,9 @@ export default class App extends React.Component {
   initialState = async () => {
     let token = await AsyncStorage.getItem(ACCESS_TOKEN);
     if (token !== null) {
-      this.props.navigation.navigate("App");
+      //this.props.navigation.navigate("App");
+      this.props.isLoggedIn();
+      console.log("token is not null")
     }
   };
 
@@ -64,12 +66,13 @@ export default class App extends React.Component {
       });
      
       let res = await response.json();
-      console.log(res)
+     // console.log(res)
       if (response.status >= 200 && response.status < 300) {
         this.setState({ error: "" });
-        let accessToken = res.accesstoken;
+        let accessToken = res.access_token;
         this.storeToken(accessToken);
         console.log(accessToken);
+        this.props.isLoggedIn();
         //this.props.navigation.navigate("App");
       } else {
         let error = res;
