@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AsyncStorage} from "react-native";
+import { AsyncStorage } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -37,6 +37,12 @@ class MainTabNavigator extends React.Component {
     categories:[],
     
   };
+  addCategory = (category) => {
+    const categories = [...this.state.categories];
+    categories.push(category);
+    this.setState({ categories });
+  };
+  
   addCategory = (category)=>
   {
     const categories = [...this.state.categories];
@@ -46,23 +52,25 @@ class MainTabNavigator extends React.Component {
   deleteItem = async(id) => {
     const token = await AsyncStorage.getItem('access_token');
     console.log(id);
-    const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    const response = await fetch(
+      `http://192.168.1.105:8000/api/transactions/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       }
-    });
+    );
     const result = await response.json();
     console.log(result);
-    if(result.status ==="success"){
+    if (result.status === "success") {
       const transactions = this.state.transactions.filter((item) => {
         return item.id !== id;
       });
       this.setState({ transactions });
     }
-    
   };
   addItem = async(props) => {
     const token = await AsyncStorage.getItem('access_token');
@@ -72,36 +80,35 @@ class MainTabNavigator extends React.Component {
       category: parseInt(props.category),
       description: props.description,
       title: props.title,
-      amount:parseFloat( props.amount),
+      amount: parseFloat(props.amount),
       currency: parseInt(props.currency),
       start_date: props.start_date,
       end_date: props.end_date,
       type: props.type,
       kind: props.kind,
-      user_id:11
-
+      user_id: 11,
     };
    // console.log(item)
     const body = new FormData();
-    body.append("user_id",item.user_id);
-    body.append("categories_id",item.category);
-    body.append("title",item.title);
-    body.append("description",item.description);
-    body.append("amount",item.amount);
-    body.append("start_date",item.start_date);
-    body.append("end_date",item.end_date);
-    body.append("type",item.type);
-    body.append("kind",item.kind);
-    body.append("interval","none");
-    body.append("currencies_id",item.currency);
-    const response = await fetch('http://192.168.1.105:8000/api/transactions',{
-      method: 'POST',
+    body.append("user_id", item.user_id);
+    body.append("categories_id", item.category);
+    body.append("title", item.title);
+    body.append("description", item.description);
+    body.append("amount", item.amount);
+    body.append("start_date", item.start_date);
+    body.append("end_date", item.end_date);
+    body.append("type", item.type);
+    body.append("kind", item.kind);
+    body.append("interval", "none");
+    body.append("currencies_id", item.currency);
+    const response = await fetch("http://192.168.1.105:8000/api/transactions", {
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json'
-      }, 
-      body
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+      },
+      body,
     });
     const result = await response.json();
     console.log(result);
@@ -138,18 +145,21 @@ class MainTabNavigator extends React.Component {
     console.log(id)
     console.log(props)
     const body = new FormData();
-    body.append("user_id",11);
-    body.append("end_date",props.end_date);
-    body.append("amount",props.amount);
-    const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json'
-      }, 
-      body
-    });
+    body.append("user_id", 11);
+    body.append("end_date", props.end_date);
+    body.append("amount", props.amount);
+    const response = await fetch(
+      `http://192.168.1.105:8000/api/transactions/${id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+        },
+        body,
+      }
+    );
     const result = await response.json();
     //console.log(result);
      const transactions = this.state.transactions.map((item) => {
@@ -157,7 +167,7 @@ class MainTabNavigator extends React.Component {
       // one transaction
       if (item.id === id) {
         const newItem = result.transaction;
-        newItem.category= item.category;
+        newItem.category = item.category;
         newItem.currency = item.currency;
         return newItem;
       }
@@ -166,41 +176,45 @@ class MainTabNavigator extends React.Component {
         return item;
       }
     });
-    this.setState({ transactions }); 
+    this.setState({ transactions });
   };
-  async componentDidMount(){
-    const token = await AsyncStorage.getItem('access_token');
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem("access_token");
     console.log(token);
-    const response = await fetch('http://192.168.1.105:8000/api/transactions',{
-      method: 'GET',
+    const response = await fetch("http://192.168.1.105:8000/api/transactions", {
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
     const result = await response.json();
-   // console.log(result);
-    const response2 = await fetch('http://192.168.1.105:8000/api/currencies',{
-      method: 'GET',
+    // console.log(result);
+    const response2 = await fetch("http://192.168.1.105:8000/api/currencies", {
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
     const result2 = await response2.json();
-    const response3 = await fetch('http://192.168.1.105:8000/api/categories',{
-      method: 'GET',
+    const response3 = await fetch("http://192.168.1.105:8000/api/categories", {
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
     const result3 = await response3.json();
-   // console.log(result3.category)
-    this.setState({transactions:result.transaction, currencies:result2.currencies, categories:result3.category});
+    // console.log(result3.category)
+    this.setState({
+      transactions: result.transaction,
+      currencies: result2.currencies,
+      categories: result3.category,
+    });
   }
 
   render() {
@@ -219,8 +233,7 @@ class MainTabNavigator extends React.Component {
               iconName = "ios-home";
             } else if (route.name == "Goals") {
               iconName = "ios-cash";
-            }
-            else if (route.name == "Logout") {
+            } else if (route.name == "Logout") {
               iconName = "ios-close-circle";
             } else if (route.name == "Categories") {
               iconName = "ios-pricetags";
@@ -270,8 +283,7 @@ class MainTabNavigator extends React.Component {
         
         )}
         />
-       
-        </Tab.Navigator>
+      </Tab.Navigator>
     );
   }
 }
@@ -296,7 +308,7 @@ function MainStackNavigator(props) {
       >
         <Stack.Screen
           name="Dashboard"
-          component={()=><MainTabNavigator isLoggedOut={props.isLoggedOut}/>}
+          component={() => <MainTabNavigator isLoggedOut={props.isLoggedOut} />}
           options={({ route }) => ({
             headerTitle: getHeaderTitle(route),
           })}

@@ -10,7 +10,7 @@ import {
 
 const ACCESS_TOKEN = "access_token";
 
-export default class App extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
     if (token !== null) {
       //this.props.navigation.navigate("App");
       this.props.isLoggedIn();
-      console.log("token is not null")
+      console.log("token is not null");
     }
   };
 
@@ -54,19 +54,19 @@ export default class App extends React.Component {
   async onLoginButtonPress() {
     try {
       const body = new FormData();
-      body.append('email', this.state.email);
-      body.append('password', this.state.password);
+      body.append("email", this.state.email);
+      body.append("password", this.state.password);
       let response = await fetch("http://192.168.1.105:8000/api/login", {
         method: "POST",
         headers: {
-          'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json'
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
         },
-        body
+        body,
       });
-     
+
       let res = await response.json();
-     // console.log(res)
+      // console.log(res)
       if (response.status >= 200 && response.status < 300) {
         this.setState({ error: "" });
         let accessToken = res.access_token;
@@ -110,8 +110,10 @@ export default class App extends React.Component {
             <Text style={styles.forgot}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.loginBtn}
-         onPress={this.onLoginButtonPress.bind(this)}>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={this.onLoginButtonPress.bind(this)}
+          >
             <Text style={styles.loginText}>LOG IN</Text>
           </TouchableOpacity>
 

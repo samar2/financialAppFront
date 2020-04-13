@@ -5,12 +5,43 @@ import {
   TouchableOpacity,
   Text,
   View,
+  AsyncStorage,
 } from "react-native";
+import Client from "./Client";
 
-export default class App extends React.Component {
-  state = {
-    email: "",
-    password: "",
+const register = ({ email, username, password }) => {
+  return Client("/api/register", {
+    body: { email, username, password },
+  }).then(({ data: user, meta: { token } }) => {
+    return { user, token };
+  });
+};
+export default class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      username: "",
+    };
+  }
+
+  onChangeText = (key, val) => {
+    this.setState({ [key]: val });
+  };
+
+  onSignUp = async () => {
+    const { username, email, password } = this.state;
+    try {
+      register({ username: username, email: email, password: password }).then(
+        ({ user, token }) => {
+          this.props.navigation.navigate("Login");
+        }
+      );
+      console.log("user successfully signed up!!!!!!!", success);
+    } catch (err) {
+      console.log("error signing up", err);
+    }
   };
 
   render() {
@@ -20,9 +51,9 @@ export default class App extends React.Component {
           <View style={styles.inputView}>
             <TextInput
               style={styles.inputText}
-              placeholder="Full Name: "
+              placeholder="Please enter your username!!!!"
               placeholderTextColor="white"
-              onChangeText={(text) => this.setState({ name: text })}
+              onChangeText={(val) => this.onChangeText("username", val)}
             />
           </View>
 
@@ -32,7 +63,7 @@ export default class App extends React.Component {
               placeholder="Email :"
               secureTextEntry={true}
               placeholderTextColor="white"
-              onChangeText={(text) => this.setState({ email: text })}
+              onChangeText={(val) => this.onChangeText("email", val)}
             />
           </View>
 
@@ -42,25 +73,12 @@ export default class App extends React.Component {
               placeholder="Password :"
               secureTextEntry={true}
               placeholderTextColor="white"
-              onChangeText={(text) => this.setState({ password: save })}
+              onChangeText={(val) => this.onChangeText("password", val)}
             />
           </View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Confirm Password :"
-              secureTextEntry={true}
-              placeholderTextColor="white"
-              onChangeText={(text) => this.setState({ confirmpassword: save })}
-            />
-          </View>
-          <TouchableOpacity style={styles.SignUpBtn}>
+          <TouchableOpacity style={styles.SignUpBtn} onPress={this.onSignUp}>
             <Text style={styles.SignUpText}>SIGN UP</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.Contiue}>
-            <Text style={styles.ContinueText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </>

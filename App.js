@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity, Text ,AsyncStorage} from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  AsyncStorage,
+} from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
 import Login from "./app/components/LogIn";
 /* import MenuTab from "./app/components/MenuTab";
@@ -16,12 +23,10 @@ class App extends React.Component {
   state = {
     incomes: [],
     expenses: [],
-    loggedIn:false
-    
+    loggedIn: false,
   };
- 
 
- /*  
+  /*  
   deletegoal = (id) => {
     const data = this.state.data.filter((item) => {
       return item.id !== id;
@@ -71,42 +76,36 @@ class App extends React.Component {
 
   async getToken() {
     try {
-      let token = await AsyncStorage.getItem('access_token');
+      let token = await AsyncStorage.getItem("access_token");
       console.log("token" + token);
     } catch (error) {
       console.log("error");
     }
   }
 
-  isLoggedIn = ()=>{
-    this.setState({loggedIn:true})
-  }
-  isLoggedOut = ()=>{
-    console.log("i am here")
-    this.setState({loggedIn:false})
-  }
+  isLoggedIn = () => {
+    this.setState({ loggedIn: true });
+  };
+  isLoggedOut = () => {
+    console.log("i am here");
+    this.setState({ loggedIn: false });
+  };
   async componentDidMount() {
-  
     const token = await this.getToken();
-    if(token)
-    console.log(token);
-    else
-    console.log("nope")
-   
-
-   
+    if (token) console.log(token);
+    else console.log("nope");
   }
-  
+
   render() {
-
-    return(<>
-    {this.state.loggedIn?<MainStackNavigator isLoggedOut={this.isLoggedOut}/>:<Login isLoggedIn={this.isLoggedIn}/>}
-
-
-</>
-    )
-   
-   
+    return (
+      <>
+        {this.state.loggedIn ? (
+          <MainStackNavigator isLoggedOut={this.isLoggedOut} />
+        ) : (
+          <Login isLoggedIn={this.isLoggedIn} />
+        )}
+      </>
+    );
   }
 }
 export default App;
