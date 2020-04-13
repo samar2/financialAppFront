@@ -35,98 +35,7 @@ class MainTabNavigator extends React.Component {
     transactions:[],
     currencies:[],
     categories:[],
-    data: [
-      {
-        id: 1,
-        category: "Salary",
-        title: "Work 1",
-        description: "something",
-        amount: 500,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 2,
-        category: "Salary",
-        title: "Work 2",
-        description: "something",
-        amount: 300,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 3,
-        category: "Salary",
-        title: "Work 13",
-        description: "something",
-        amount: 250,
-        currency: "$",
-        date: "01/03/2020",
-        type: "income",
-      },
-      {
-        id: 4,
-        category: "Extra",
-        description: "something",
-        title: "Freelance",
-        amount: 700,
-        currency: "$",
-        date: "11/03/2020",
-        type: "income",
-      },
-      {
-        id: 5,
-        category: "Fun",
-        description: "something",
-        title: "Lottery",
-        amount: 10,
-        currency: "$",
-        date: "07/03/2020",
-        type: "income",
-      },
-      {
-        id: 6,
-        category: "Extra",
-        description: "something",
-        title: "Sold TV",
-        amount: 140,
-        currency: "$",
-        date: "12/03/2020",
-        type: "income",
-      },
-      {
-        id: 7,
-        category: "Extra",
-        description: "something",
-        title: "gift",
-        amount: 50,
-        currency: "$",
-        date: "17/03/2020",
-        type: "income",
-      },
-      {
-        id: 8,
-        category: "Utilities",
-        description: "monthly bill",
-        title: "Gas",
-        amount: 50,
-        currency: "$",
-        date: "18/03/2020",
-        type: "expense",
-      },
-      {
-        id: 8,
-        category: "Loans",
-        description: "taken from bank",
-        title: "House",
-        amount: 300,
-        currency: "$",
-        date: "18/03/2020",
-        type: "expense",
-      },
-    ],
+    
   };
   addCategory = (category)=>
   {
@@ -135,6 +44,7 @@ class MainTabNavigator extends React.Component {
     this.setState({categories})
   }
   deleteItem = async(id) => {
+    const token = await AsyncStorage.getItem('access_token');
     console.log(id);
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'DELETE',
@@ -155,10 +65,10 @@ class MainTabNavigator extends React.Component {
     
   };
   addItem = async(props) => {
-    const data = [...this.state.data];
-    const id = data[data.length - 1].id + 1;
+    const token = await AsyncStorage.getItem('access_token');
+   
     const item = {
-      id: id,
+      
       category: parseInt(props.category),
       description: props.description,
       title: props.title,
@@ -171,7 +81,7 @@ class MainTabNavigator extends React.Component {
       user_id:11
 
     };
-    console.log(item)
+   // console.log(item)
     const body = new FormData();
     body.append("user_id",item.user_id);
     body.append("categories_id",item.category);
@@ -204,7 +114,7 @@ class MainTabNavigator extends React.Component {
           'Accept': 'application/json'
         }});
         const result2 = await response2.json();
-        console.log(result2);
+       // console.log(result2);
         const response3 = await fetch(`http://192.168.1.105:8000/api/currencies/${result.transaction.currencies_id}`,{
         method: 'GET',
         headers: {
@@ -213,16 +123,18 @@ class MainTabNavigator extends React.Component {
           'Accept': 'application/json'
         }});
         const result3 = await response3.json();
-        console.log(result3);
+       // console.log(result3);
     const transactions = [...this.state.transactions];
     const transaction= result.transaction;
     transaction.category= result2.category;
     transaction.currency = result3.currency;
+    transaction.amount = parseFloat(result.transaction.amount)
     transactions.push(transaction)
     this.setState({transactions});
     }
   };
   editItem = async(id, props) => {
+    const token = await AsyncStorage.getItem('access_token');
     console.log(id)
     console.log(props)
     const body = new FormData();
@@ -239,7 +151,7 @@ class MainTabNavigator extends React.Component {
       body
     });
     const result = await response.json();
-    console.log(result);
+    //console.log(result);
      const transactions = this.state.transactions.map((item) => {
       // if this is the transaction we need to change, update it. This will apply to exactly
       // one transaction
@@ -340,7 +252,17 @@ class MainTabNavigator extends React.Component {
             />
           )}
         />
-        <Tab.Screen name="Goals" component={Goals} />
+        <Tab.Screen name="Goals" component={(props) => (
+            <Goals
+              data={this.state.data}
+              deleteItem={this.deleteItem}
+              addItem={this.addItem}
+              editItem={this.editItem}
+              transactions={this.state.transactions}
+              currencies={this.state.currencies}
+              categories={this.state.categories}
+            />
+          )} />
         <Tab.Screen name="Logout" component={(props)=>(
           <Logout
           isLoggedOut={this.props.isLoggedOut}

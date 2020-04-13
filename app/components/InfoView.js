@@ -15,10 +15,10 @@ export default class InfoView extends React.Component {
     month:this.props.month
   };
   componentWillReceiveProps(nextProps){
-console.log(nextProps)
+//console.log(nextProps)
 this.setState({month:nextProps.month},()=>{
 const expense = this.props.data.reduce(
-  (a, b) => a + (b.type == "expense"&& ((b.start_date.split("-")[1]==(this.state.month.format('MM')) && b.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && b.end_date.split("-")[1]>=(this.state.month.format('MM')) ))) ? b.amount : 0),
+  (a, b) => a + ((b.type == "expense" ||b.type =='goal saving')&& ((b.start_date.split("-")[1]==(this.state.month.format('MM')) && b.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && b.end_date.split("-")[1]>=(this.state.month.format('MM')) ))) ? b.amount : 0),
   0
 );
 const income = this.props.data.reduce(
@@ -44,7 +44,7 @@ for (var prop in holder) {
   obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });
 }
 const arrExpense = this.props.data.filter(
-  (item) => item.type === "expense"&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )))
+  (item) => (item.type === "expense"|| item.type==="goal saving")&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )))
 );
 var holder2 = {};
 
@@ -74,9 +74,10 @@ this.setState({
   componentDidMount() {
     console.log("here",this.state.month)
     const expense = this.props.data.reduce(
-      (a, b) => a + (b.type == "expense"&& ((b.start_date.split("-")[1]==(this.state.month.format('MM')) && b.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && b.end_date.split("-")[1]>=(this.state.month.format('MM')) ))) ? b.amount : 0),
+      (a, b) => a + ((b.type == "expense" ||b.type =='goal saving')&& ((b.start_date.split("-")[1]==(this.state.month.format('MM')) && b.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && b.end_date.split("-")[1]>=(this.state.month.format('MM')) ))) ? b.amount : 0),
       0
     );
+    console.log(expense)
     const income = this.props.data.reduce(
       (a, b) => a + (b.type == "income"&& ((b.start_date.split("-")[1]==(this.state.month.format('MM')) && b.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(b.kind==='recurring' && b.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && b.end_date.split("-")[1]>=(this.state.month.format('MM')) ))) ? b.amount : 0),
       0
@@ -100,8 +101,9 @@ this.setState({
       obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });
     }
     const arrExpense = this.props.data.filter(
-      (item) => item.type === "expense"&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )))
+      (item) => (item.type === "expense" || item.type === "goal saving")&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )))
     );
+    //console.log(arrExpense)
     var holder2 = {};
 
     arrExpense.forEach(function (d) {
@@ -112,12 +114,13 @@ this.setState({
         holder2[d.category.name] = {amount:d.amount,category:d.category.name, icon:d.category.icon, currency:d.currency.symbol};
       }
     });
-
+    //console.log(holder2)
     var obj3 = [];
 
     for (var prop in holder2) {
       obj3.push({ category: holder2[prop].category, amount: holder2[prop].amount, currency: holder2[prop].currency, icon:holder2[prop].icon });
     }
+    console.log(obj3)
     this.setState({
       budget,
       income,

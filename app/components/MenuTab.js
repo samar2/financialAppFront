@@ -279,7 +279,7 @@ export default class MenuTab extends React.Component {
                   return item.type === "expense";
                 })} */
                 data={this.props.transactions.filter((item) => {
-                  return item.type === "expense"&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )));
+                  return (item.type === "expense" || item.type === "goal saving")&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )));
                })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
