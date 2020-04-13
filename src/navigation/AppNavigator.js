@@ -127,7 +127,18 @@ class MainTabNavigator extends React.Component {
       },
     ],
   };
-  deleteItem = (id) => {
+  deleteItem = async(id) => {
+    console.log(id);
+    const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const result = await response.json();
+    console.log(result);
     const data = this.state.data.filter((item) => {
       return item.id !== id;
     });
@@ -170,14 +181,36 @@ class MainTabNavigator extends React.Component {
         Accept: "application/json",
       },
       body,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
+      }, 
+      body
     });
     const result = await response.json();
     console.log(result);
     data.push(item);
     this.setState({ data });
   };
-  editItem = (id, props) => {
-    const data = this.state.data.map((item) => {
+  editItem = async(id, props) => {
+    console.log(id)
+    console.log(props)
+    const body = new FormData();
+    body.append("user_id",11);
+    body.append("end_date",props.end_date);
+    body.append("amount",props.amount);
+    const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
+      }, 
+      body
+    });
+    const result = await response.json();
+    console.log(result);
+    /* const data = this.state.data.map((item) => {
       // if this is the contact we need to change, update it. This will apply to exactly
       // one contact
       if (item.id === id) {
@@ -198,7 +231,7 @@ class MainTabNavigator extends React.Component {
         return item;
       }
     });
-    this.setState({ data });
+    this.setState({ data }); */
   };
   async componentDidMount() {
     const response = await fetch("http://192.168.1.105:8000/api/transactions", {
@@ -208,6 +241,10 @@ class MainTabNavigator extends React.Component {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     });
     const result = await response.json();
     // console.log(result);
@@ -218,6 +255,10 @@ class MainTabNavigator extends React.Component {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     });
     const result2 = await response2.json();
     const response3 = await fetch("http://192.168.1.105:8000/api/categories", {
@@ -227,6 +268,10 @@ class MainTabNavigator extends React.Component {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     });
     const result3 = await response3.json();
     console.log(result3.category);

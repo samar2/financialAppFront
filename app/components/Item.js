@@ -68,11 +68,18 @@ class Item extends React.Component {
       inputRange: [-SCREEN_WIDTH, -100, -35],
       outputRange: [0, 1, 0],
     });
+    
     return {
       opacity,
     };
   }
 
+  setDeleteColor(){
+    const backgroundColor= this.props.kind==='recurring'?"grey":"#D50000";
+    return{
+      backgroundColor
+    }
+  }
   getLeftButtonProps() {
     const opacity = this.position.x.interpolate({
       inputRange: [35, 75, 320],
@@ -162,12 +169,14 @@ class Item extends React.Component {
           style={[
             rightButtonContainer,
             { left: SCREEN_WIDTH / 1.7 },
-            this.getRightButtonProps(),
+           this.setDeleteColor(),
+            this.getRightButtonProps()
           ]}
         >
           <TouchableOpacity
+          disabled={this.props.type==='recurring'?true:false}
             onPress={() =>
-              this.completeSwipe("left", () => this.props.deleteButtonPressed())
+             this.props.type==='recurring'&&this.completeSwipe("left", () => this.props.deleteButtonPressed())
             }
           >
             <Icon type="font-awesome" name="trash" />
@@ -236,9 +245,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 23,
     elevation: 3,
-    backgroundColor: "#ea040c",
-    zIndex: 1,
-  },
+   /*  backgroundColor: this.setDeleteColor(), */
+    zIndex: 1
+  }
 });
 
 export default Item;

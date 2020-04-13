@@ -12,6 +12,7 @@ import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
 import InfoView from "./InfoView";
 import AddGoal from "./AddGoal";
+import AddExpense from "./AddExpense";
 
 const { width } = Dimensions.get("window");
 
@@ -249,6 +250,8 @@ export default class MenuTab extends React.Component {
               }
             >
               {/* add expense view here */}
+              <AddExpense addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
+              
               <ListNew
                 /* data={this.props.data.filter((item) => {
                   return item.type === "expense";
@@ -315,7 +318,7 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-              <InfoView data={this.props.transactions} />
+             { <InfoView data={this.props.transactions} />}
             </Animated.View>
           </ScrollView>
         </View>
