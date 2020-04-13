@@ -167,6 +167,7 @@ class MainTabNavigator extends React.Component {
       // one transaction
       if (item.id === id) {
         const newItem = result.transaction;
+        newItem.amount = parseFloat(result.transaction.amount)
         newItem.category = item.category;
         newItem.currency = item.currency;
         return newItem;

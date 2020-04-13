@@ -59,6 +59,7 @@ class Categories extends React.Component {
                 <Picker.Item label="tool" value="ios-build" />
                 <Picker.Item label="bulb" value="ios-bulb" />
                 <Picker.Item label="car" value="ios-car" />
+                <Picker.Item label="house" value="ios-home" />
                 <Picker.Item label="heart" value="ios-heart" />
                 <Picker.Item label="fun" value="ios-ice-cream" />
                 <Picker.Item label="health" value="ios-medkit" />

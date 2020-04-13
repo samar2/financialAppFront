@@ -1,6 +1,7 @@
 import "whatwg-fetch";
-import { getToken } from "../utils/auth";
+//import { getToken } from "../utils/auth";
 import NProgress from "nprogress";
+import {AsyncStorage} from 'react-native';
 let requestsCounter = 0;
 
 function Client(endpoint, { method, body, ...customConfig } = {}) {

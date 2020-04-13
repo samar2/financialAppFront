@@ -302,64 +302,7 @@ this.setState({
                   </View>
                 </View>
               ))}
-          {/*  <View style={styles.containerLabels}>
-            <Text style={styles.labelCategory}>Entertainment</Text>
-            <Text style={styles.labelAmount}>250$</Text>
-          </View>
-          <View style={styles.container}>
-            <Ionicons
-              name="md-heart"
-              size={32}
-              color="orange"
-              style={styles.icon}
-            />
-            <Progress.Bar
-              progress={0.25}
-              width={200}
-              height={20}
-              style={styles.bar}
-            />
-            <Text style={styles.text}>25%</Text>
-          </View>
-          <View style={styles.containerLabels}>
-            <Text style={styles.labelCategory}>Food</Text>
-            <Text style={styles.labelAmount}>150$</Text>
-          </View>
-          <View style={styles.container}>
-            <Ionicons
-              name="md-cafe"
-              size={32}
-              color="orange"
-              style={styles.icon}
-            />
-            <Progress.Bar
-              progress={0.15}
-              width={200}
-              height={20}
-              style={styles.bar}
-            />
-            <Text style={styles.text}>15%</Text>
-          </View>
-          <View style={styles.containerLabels}>
-            <Text style={styles.labelCategory}>Bills</Text>
-            <Text style={styles.labelAmount}>650$</Text>
-          </View>
-          <View style={styles.container}>
-            <Ionicons
-              name="md-wallet"
-              size={32}
-              color="orange"
-              style={styles.icon}
-            />
-            <Progress.Bar
-              progress={0.6}
-              width={200}
-              height={20}
-              style={styles.bar}
-            />
-            <Text style={styles.text}>60%</Text>
-          </View>
-         */}
+          
         </View>
       </>
     );
@@ -390,12 +333,12 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   labelCategory: {
-    fontSize: 18,
+    fontSize: 15,
     width: "30%",
     marginLeft: "10%",
   },
   labelAmount: {
-    fontSize: 18,
+    fontSize: 15,
     marginRight: "20%",
   },
   icon: {

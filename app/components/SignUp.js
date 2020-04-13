@@ -7,7 +7,6 @@ import {
   View,
   AsyncStorage,
 } from "react-native";
-import Client from "./Client";
 
 const register = ({ email, username, password }) => {
   return Client("/api/register", {
@@ -26,22 +25,61 @@ export default class Signup extends React.Component {
     };
   }
 
+
+  async storeToken(accessToken) {
+    try {
+      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+      this.getToken();
+    } catch (error) {
+      console.log("error");
+    }
+  }
+
+  async getToken() {
+    try {
+      let token = await AsyncStorage.getItem(ACCESS_TOKEN);
+      console.log("token" + token);
+    } catch (error) {
+      console.log("error");
+    }
+  }
   onChangeText = (key, val) => {
     this.setState({ [key]: val });
   };
 
   onSignUp = async () => {
-    const { username, email, password } = this.state;
     try {
-      register({ username: username, email: email, password: password }).then(
-        ({ user, token }) => {
-          this.props.navigation.navigate("Login");
-        }
-      );
-      console.log("user successfully signed up!!!!!!!", success);
-    } catch (err) {
-      console.log("error signing up", err);
+      const body = new FormData();
+      body.append("name", this.state.username);
+      body.append("email", this.state.email);
+      body.append("password", this.state.password);
+      body.append("currencies_id", 1);
+      let response = await fetch("http://192.168.1.105:8000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+        },
+        body,
+      });
+
+      let res = await response.json();
+      // console.log(res)
+      if (response.status >= 200 && response.status < 300) {
+        this.setState({ error: "" });
+        let accessToken = res.access_token;
+        this.storeToken(accessToken);
+        console.log(accessToken);
+        this.props.changeLogin();
+        //this.props.navigation.navigate("App");
+      } else {
+        let error = res;
+        throw error;
+      }
+    } catch (error) {
+      console.log("error", error);
     }
+
   };
 
   render() {
@@ -61,7 +99,6 @@ export default class Signup extends React.Component {
             <TextInput
               style={styles.inputText}
               placeholder="Email :"
-              secureTextEntry={true}
               placeholderTextColor="white"
               onChangeText={(val) => this.onChangeText("email", val)}
             />

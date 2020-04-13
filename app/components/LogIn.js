@@ -7,6 +7,7 @@ import {
   View,
   AsyncStorage,
 } from "react-native";
+import Signup from './SignUp'
 
 const ACCESS_TOKEN = "access_token";
 
@@ -17,11 +18,17 @@ export default class Login extends React.Component {
       email: "",
       password: "",
       error: "",
+      isLogin:true
     };
   }
 
   componentDidMount() {
     this.initialState().done();
+  }
+
+  changeLogin = ()=>{
+    console.log("mwahahahah")
+    this.setState({isLogin:true})
   }
 
   initialState = async () => {
@@ -85,7 +92,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <>
+      <>{this.state.isLogin?
         <View style={styles.container}>
           <View style={styles.inputView}>
             <TextInput
@@ -119,11 +126,13 @@ export default class Login extends React.Component {
 
           <TouchableOpacity
             style={styles.SignUpBtn}
-            onPress={this.onLoginButtonPress.bind(this)}
+            onPress={()=>this.setState({isLogin:false})}
           >
             <Text style={styles.SignUpText}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
+        :<Signup isLoggedIn={this.props.isLoggedIn} changeLogin={this.changeLogin}/>}
+  
       </>
     );
   }
