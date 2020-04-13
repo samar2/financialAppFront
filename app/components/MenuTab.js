@@ -287,9 +287,6 @@ export default class MenuTab extends React.Component {
             >
               <AddIncome addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
               <ListNew
-                /* data={this.props.data.filter((item) => {
-                  return item.type === "income";
-                })} */
                 data={this.props.transactions.filter((item) => {
                   return item.type === "income";
                 })}

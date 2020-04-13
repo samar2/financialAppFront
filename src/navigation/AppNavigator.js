@@ -132,17 +132,20 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     });
     const result = await response.json();
     console.log(result);
-    const data = this.state.data.filter((item) => {
-      return item.id !== id;
-    });
-    this.setState({ data });
+    if(result.status ==="success"){
+      const transactions = this.state.transactions.filter((item) => {
+        return item.id !== id;
+      });
+      this.setState({ transactions });
+    }
+    
   };
   addItem = async(props) => {
     const data = [...this.state.data];
@@ -177,7 +180,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -185,8 +188,32 @@ class MainTabNavigator extends React.Component {
     });
     const result = await response.json();
     console.log(result);
-    data.push(item);
-    this.setState({ data });
+    if(result.status==="success"){
+      const response2 = await fetch(`http://192.168.1.105:8000/api/categories/${result.transaction.categories_id}`,{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+         
+          'Accept': 'application/json'
+        }});
+        const result2 = await response2.json();
+        console.log(result2);
+        const response3 = await fetch(`http://192.168.1.105:8000/api/currencies/${result.transaction.currencies_id}`,{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
+         
+          'Accept': 'application/json'
+        }});
+        const result3 = await response3.json();
+        console.log(result3);
+    const transactions = [...this.state.transactions];
+    const transaction= result.transaction;
+    transaction.category= result2.category;
+    transaction.currency = result3.currency;
+    transactions.push(transaction)
+    this.setState({transactions});
+    }
   };
   editItem = async(id, props) => {
     console.log(id)
@@ -198,7 +225,7 @@ class MainTabNavigator extends React.Component {
     const response = await fetch(`http://192.168.1.105:8000/api/transactions/${id}`,{
       method: 'POST',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       }, 
@@ -206,20 +233,13 @@ class MainTabNavigator extends React.Component {
     });
     const result = await response.json();
     console.log(result);
-    /* const data = this.state.data.map((item) => {
-      // if this is the contact we need to change, update it. This will apply to exactly
-      // one contact
+     const transactions = this.state.transactions.map((item) => {
+      // if this is the transaction we need to change, update it. This will apply to exactly
+      // one transaction
       if (item.id === id) {
-        const newItem = {
-          id: item.id,
-          category: props.category || item.category,
-          description: props.description || item.description,
-          title: props.title || item.title,
-          amount: props.amount || item.amount,
-          currency: props.currency || item.currency,
-          date: props.date || item.date,
-          type: props.type || item.type,
-        };
+        const newItem = result.transaction;
+        newItem.category= item.category;
+        newItem.currency = item.currency;
         return newItem;
       }
       // otherwise, don't change the transaction at all
@@ -227,13 +247,13 @@ class MainTabNavigator extends React.Component {
         return item;
       }
     });
-    this.setState({ data }); */
+    this.setState({ transactions }); 
   };
   async componentDidMount(){
     const response = await fetch('http://192.168.1.105:8000/api/transactions',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -243,7 +263,7 @@ class MainTabNavigator extends React.Component {
     const response2 = await fetch('http://192.168.1.105:8000/api/currencies',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
@@ -252,13 +272,13 @@ class MainTabNavigator extends React.Component {
     const response3 = await fetch('http://192.168.1.105:8000/api/categories',{
       method: 'GET',
       headers: {
-        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3MjYwOTgsImV4cCI6MTU4NjcyOTY5OCwibmJmIjoxNTg2NzI2MDk4LCJqdGkiOiIzd0d0N2dSMFRrd0p3WUw5Iiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.4avmurXGHrmOVvZCdOOaNmYmcmPa4qrh1KaaZ7FPIS8`,
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuMTA1OjgwMDBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODY3NjkzMDcsImV4cCI6MTU4Njc3MjkwNywibmJmIjoxNTg2NzY5MzA3LCJqdGkiOiJSckE4NHF6ZUdQaFd0YnJMIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lbGti8bAEb57sAm3akdGjfigf7Qu660JKddHIZs9U04`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     });
     const result3 = await response3.json();
-    console.log(result3.category)
+   // console.log(result3.category)
     this.setState({transactions:result.transaction, currencies:result2.currencies, categories:result3.category});
   }
 

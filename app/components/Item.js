@@ -103,6 +103,7 @@ class Item extends React.Component {
   }
 
   completeSwipe(dimension, callback) {
+    console.log("hello")
     const x = dimension === "right" ? SCREEN_WIDTH : -SCREEN_WIDTH;
     //const x=-SCREEN_WIDTH;
     Animated.timing(this.position, {
@@ -174,9 +175,9 @@ class Item extends React.Component {
           ]}
         >
           <TouchableOpacity
-          disabled={this.props.type==='recurring'?true:false}
+          /* disabled={this.props.type==='recurring'?true:false} */
             onPress={() =>
-             this.props.type==='recurring'&&this.completeSwipe("left", () => this.props.deleteButtonPressed())
+            this.completeSwipe("left", () => this.props.deleteButtonPressed())
             }
           >
             <Icon type="font-awesome" name="trash" />

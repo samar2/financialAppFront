@@ -28,7 +28,7 @@ class ListNew extends React.Component {
     var year = currentDate.getUTCFullYear();
 
     const newdate = year + "-"+(month<10?"0":"") + month + "-" +(day<10?"0":"")+ day;
-    console.log(newdate);
+   // console.log(newdate);
     this.setState({selectedItemDate:newdate, show2:false})
     
   };

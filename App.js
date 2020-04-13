@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
 
-import MenuTab from "./app/components/MenuTab";
+/* import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 import SignUp from "./app/components/SignUp";
 import AddGoalSavings from "./app/components/AddGoalSavings";
-import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
+import GoalSavingsTableView from "./app/components/GoalSavingsTableView"; */
 //import InfoView from "./app/components/InfoView";
 //import GoalSavingsTableView from "./app/components/GoalSavingsTableView";
 //import BackHandler from "./app/components/BackHandler";
@@ -353,27 +353,12 @@ class App extends React.Component {
     this.setState({transactions:result});
   } */
   render() {
-    return <Login />;
-    // return (<>
-    {
-      /* <Login></Login> */
-    }
-    /*   <MenuTab
-        data={this.state.data}
-        deleteItem={this.deleteItem}
-		addItem={this.addItem}
-		editItem={this.editItem}
-      />  */
-    {
-      /*    {this.state.incomes.length!==0?<Reports incomes={this.state.incomes}
-      expenses={this.state.expenses}
-      />:null} */
-    }
-    {
-      /*   <GoalSavingsTableView data={this.state.data} deletegoal={this.deletegoal}></GoalSavingsTableView> */
-    }
-    //  </>
-    // );
+
+    return(
+<MainStackNavigator/>
+    )
+   
+   
   }
 }
 export default App;
