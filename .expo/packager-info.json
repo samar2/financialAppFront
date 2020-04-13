@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
+  "devToolsPort": 19007,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 49479,
-  "expoServerNgrokUrl": "https://jm-sbj.anonymous.financialappfront.exp.direct",
-  "packagerNgrokUrl": "https://packager.jm-sbj.anonymous.financialappfront.exp.direct",
-  "ngrokPid": 49542
+  "packagerPort": 19008,
+  "packagerPid": 65273,
+  "expoServerNgrokUrl": "https://hg-uc7.anonymous.financialappfront.exp.direct",
+  "packagerNgrokUrl": "https://packager.hg-uc7.anonymous.financialappfront.exp.direct",
+  "ngrokPid": 65297
 }

@@ -5,14 +5,17 @@ import {
   TouchableOpacity,
   Animated,
   ScrollView,
-  Image,
+  Button,
   Dimensions,
+  TouchableHighlight
 } from "react-native";
+import MonthSelectorCalendar from 'react-native-month-selector';
 import ListNew from "./ListNew";
 import AddIncome from "./AddIncome";
 import InfoView from "./InfoView";
 import AddGoal from "./AddGoal";
 import AddExpense from "./AddExpense";
+import moment from 'moment';
 
 const { width } = Dimensions.get("window");
 
@@ -29,6 +32,8 @@ export default class MenuTab extends React.Component {
     translateY: -1000,
     translateSS: -1000,
     translateBB: -1000,
+    visible:"none", 
+    month: moment()
   };
 
   handleSlide = (type) => {
@@ -250,6 +255,23 @@ export default class MenuTab extends React.Component {
               }
             >
               {/* add expense view here */}
+              <View style={{width:300, margin:5}}>
+      <Text >
+        Selected Month is { this.state.month && this.state.month.format('MMM YYYY')}
+      </Text>
+      <TouchableOpacity
+                style ={{
+                    flex:1,
+                    alignItems:'center'
+                }}>
+      <Button title="Select Month" onPress={()=>this.setState({visible:"flex"})}></Button>
+      </TouchableOpacity>
+      <MonthSelectorCalendar
+      containerStyle={{display:this.state.visible}}
+          selectedDate={this.state.month}
+          onMonthTapped={(date) => this.setState({ month: date, visible:"none" }, ()=>console.log(this.state.month))} 
+      />
+    </View>
               <AddExpense addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
               
               <ListNew
@@ -257,8 +279,8 @@ export default class MenuTab extends React.Component {
                   return item.type === "expense";
                 })} */
                 data={this.props.transactions.filter((item) => {
-                  return item.type === "expense";
-                })}
+                  return item.type === "expense"&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )));
+               })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
                 currencies={this.props.currencies}
@@ -285,10 +307,27 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
+               <View style={{width:300, margin:5}}>
+      <Text >
+        Selected Month is { this.state.month && this.state.month.format('MMM YYYY')}
+      </Text>
+      <TouchableOpacity
+                style ={{
+                    flex:1,
+                    alignItems:'center'
+                }}>
+      <Button title="Select Month" onPress={()=>this.setState({visible:"flex"})}></Button>
+      </TouchableOpacity>
+      <MonthSelectorCalendar
+      containerStyle={{display:this.state.visible}}
+          selectedDate={this.state.month}
+          onMonthTapped={(date) => this.setState({ month: date, visible:"none" }, ()=>console.log(this.state.month))} 
+      />
+    </View>
               <AddIncome addItem={this.props.addItem} currencies={this.props.currencies} categories={this.props.categories} />
               <ListNew
                 data={this.props.transactions.filter((item) => {
-                  return item.type === "income";
+                  return item.type === "income"&& ((item.start_date.split("-")[1]==(this.state.month.format('MM')) &&item.start_date.split("-")[0]===""+(this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]>""+this.state.month.format('YYYY'))||(item.kind==='recurring' &&item.end_date.split("-")[0]==""+(this.state.month.format('YYYY')) && item.end_date.split("-")[1]>=(this.state.month.format('MM')) )));
                 })}
                 deleteItem={this.props.deleteItem}
                 editItem={this.props.editItem}
@@ -315,7 +354,7 @@ export default class MenuTab extends React.Component {
                 })
               }
             >
-             { <InfoView data={this.props.transactions} />}
+             { <InfoView data={this.props.transactions} month={this.state.month} />}
             </Animated.View>
           </ScrollView>
         </View>
