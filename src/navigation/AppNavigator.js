@@ -134,6 +134,13 @@ class MainTabNavigator extends React.Component {
     this.setState({ categories });
   };
   deleteItem = async (id) => {
+  addCategory = (category)=>
+  {
+    const categories = [...this.state.categories];
+    categories.push(category);
+    this.setState({categories})
+  }
+  deleteItem = async(id) => {
     console.log(id);
     const response = await fetch(
       `http://192.168.1.105:8000/api/transactions/${id}`,
