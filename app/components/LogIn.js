@@ -51,19 +51,20 @@ export default class App extends React.Component {
 
   async onLoginButtonPress() {
     try {
-      let response = await fetch("http://127.0.0.1:8000/api/login", {
+      const body = new FormData();
+      body.append('email', this.state.email);
+      body.append('password', this.state.password);
+      let response = await fetch("http://192.168.1.105:8000/api/login", {
         method: "POST",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
+        body
       });
-
+     
       let res = await response.json();
+      console.log(res)
       if (response.status >= 200 && response.status < 300) {
         this.setState({ error: "" });
         let accessToken = res.accesstoken;
@@ -106,7 +107,8 @@ export default class App extends React.Component {
             <Text style={styles.forgot}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.loginBtn}>
+          <TouchableOpacity style={styles.loginBtn}
+         onPress={this.onLoginButtonPress.bind(this)}>
             <Text style={styles.loginText}>LOG IN</Text>
           </TouchableOpacity>
 

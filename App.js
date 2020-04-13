@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import MainStackNavigator from "./src/navigation/AppNavigator";
-
+import Login from "./app/components/LogIn";
 /* import MenuTab from "./app/components/MenuTab";
 import Login from "./app/components/LogIn";
 import SignUp from "./app/components/SignUp";
@@ -354,8 +354,10 @@ class App extends React.Component {
   } */
   render() {
 
-    return(
-<MainStackNavigator/>
+    return(<>
+{/* <MainStackNavigator/> */}
+<Login/>
+</>
     )
    
    
