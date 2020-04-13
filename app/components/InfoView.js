@@ -35,7 +35,7 @@ export default class InfoView extends React.Component {
         
       }
     });
-    console.log(holder)
+   // console.log(holder)
     var obj2 = [];
     for (var prop in holder) {
       obj2.push({ category: holder[prop].category, amount: holder[prop].amount, currency: holder[prop].currency, icon:holder[prop].icon });

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Button, View , TextInput, Picker} from "react-native";
+import { Text, Button, View , TextInput, Picker, StyleSheet} from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Modal from "react-native-modal";
 
