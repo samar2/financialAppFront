@@ -70,7 +70,7 @@ export default class App extends React.Component {
         let accessToken = res.accesstoken;
         this.storeToken(accessToken);
         console.log(accessToken);
-        this.props.navigation.navigate("App");
+        //this.props.navigation.navigate("App");
       } else {
         let error = res;
         throw error;
